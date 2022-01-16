@@ -1,1 +1,8 @@
-1213
+git init
+git add .
+git commit -m "note"
+git remote add origin git@github.com:MaQaQu/Tool.git
+git push -u origin master
+
+git remote rm origin
+ssh -T git@github.com
