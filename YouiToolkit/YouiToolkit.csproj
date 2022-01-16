@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+   <LangVersion>10.0</LangVersion>
+   <PlatformTarget>x64</PlatformTarget>
+   <SignAssembly>False</SignAssembly>
+   <ApplicationIcon>Resources\youibot.ico</ApplicationIcon>
+   <StartupObject>YouiToolkit.Program</StartupObject>
+   <AssemblyVersion></AssemblyVersion>
+   <FileVersion></FileVersion>
+   <Authors>Youibot</Authors>
+   <Company>Youibot</Company>
+   <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\splash_screen.jpg" />
+    <None Remove="Resources\splash_screen_logo.jpg" />
+    <None Remove="Resources\youibot.ico" />
+    <None Remove="Resources\youibot.svg" />
+    <None Remove="Resources\youibot_black.ico" />
+    <None Remove="Resources\youibot_black.png" />
+    <None Remove="Resources\youibot_black.svg" />
+    <None Remove="Resources\youibot_subtitle.png" />
+    <None Remove="Resources\youibot_subtitle_white.png" />
+    <None Remove="Resources\youibot_superellipse.ico" />
+    <None Remove="Resources\youibot_superellipse.png" />
+    <None Remove="Resources\youibot_white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\splash_screen.jpg" />
+    <Resource Include="Resources\splash_screen_logo.jpg" />
+    <Resource Include="Resources\youibot.ico" />
+    <Resource Include="Resources\youibot.png" />
+    <Resource Include="Resources\youibot_black.ico" />
+    <Resource Include="Resources\youibot_black.png" />
+    <Resource Include="Resources\youibot_black.svg" />
+    <Resource Include="Resources\youibot_subtitle.png" />
+    <Resource Include="Resources\youibot_subtitle_white.png" />
+    <Resource Include="Resources\youibot_white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SharpDX" Version="4.2.0" />
+    <PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
+    <PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YouiToolkit.Assist\YouiToolkit.Assist.csproj" />
+    <ProjectReference Include="..\SuperMath\SuperMath.csproj" />
+    <ProjectReference Include="..\SuperConfig\SuperConfig.csproj" />
+    <ProjectReference Include="..\YouiToolkit.Design.DirectX\YouiToolkit.Design.DirectX.csproj" />
+    <ProjectReference Include="..\YouiToolkit.Design\YouiToolkit.Design.csproj" />
+    <ProjectReference Include="..\YouiToolkit.Logging\YouiToolkit.Logging.csproj" />
+    <ProjectReference Include="..\YouiToolkit.Utils\YouiToolkit.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Map\PageMapRender.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\youibot.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Map\PageMapRender.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

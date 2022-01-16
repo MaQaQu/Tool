@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:YouiToolkit.Design">
+
+    <local:HightlightBrushConverter x:Key="HightlightBrushConverter" />
+    
+    <local:IsNotNullConverter x:Key="IsNotNullConverter" />
+    <local:IsNullConverter x:Key="IsNullConverter" />
+    <local:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
+    <local:IconConverter x:Key="IconConverter" />
+    <local:BoolToInvisibleConverter x:Key="BoolToInvisibleConverter" />
+    <local:BoolToVisibleConverter x:Key="BoolToVisibleConverter" />
+    <local:HalfConverter x:Key="HalfConverter" />
+    <local:CornerRadiusToTopHalfConverter x:Key="CornerRadiusToTopHalfConverter" />
+    <local:CornerRadiusToBottomConverter x:Key="CornerRadiusToBottomConverter" />
+    <local:BrushToColorConverter x:Key="BrushToColorConverter" />
+    <local:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    <local:GridLengthConverter x:Key="GridLengthConverter" />
+    <local:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter" />
+    <local:DoubleToCornerRadiusConverter x:Key="DoubleToCornerRadiusConverter" />
+    <local:CornerRadiusToDoubleConverter x:Key="CornerRadiusToDoubleConverter" />
+    <local:WidthAndHeightToSizeConverter x:Key="WidthAndHeightToSizeConverter" />
+
+    <local:MultiCombinerConverter x:Key="MultiCombinerConverter" />
+
+    <local:Add3Converter x:Key="Add3Converter" />
+    <local:Add5Converter x:Key="Add5Converter" />
+    <local:Add10Converter x:Key="Add10Converter" />
+    
+    <local:TagControlBackgroundConverter x:Key="TagControlBackgroundConverter" />
+    <local:TagControlRemovableConverter x:Key="TagControlRemovableConverter" />
+
+    <local:BoolInverseConverter x:Key="BoolInverseConverter" />
+
+    <local:DoubleToRightMarginConverter x:Key="DoubleToRightMarginConverter" />
+    <local:DoubleToLeftMarginConverter x:Key="DoubleToLeftMarginConverter" />
+
+
+    <local:InverseOrientationConverter x:Key="InverseOrientationConverter" />
+    <local:CloneConverter x:Key="CloneConverter" />
+
+    <local:LoadingBackgroundThicknessConverter x:Key="LoadingBackgroundThicknessConverter" />
+    <local:LoadingLineYConverter x:Key="LoadingLineYConverter" />
+    <local:LoadingClassicMarginConverter x:Key="LoadingClassicMarginConverter" />
+    <local:LoadingClassicEllipseSizeConverter x:Key="LoadingClassicEllipseSizeConverter" />
+    
+    <local:MsbButtonVisibilityConverter x:Key="MsbButtonVisibilityConverter" />
+    <local:MsbButtonIsDefaultConverter x:Key="MsbButtonIsDefaultConverter" />
+    <local:MsbCheckIconVisibilityConverter x:Key="MsbCheckIconVisibilityConverter" />
+    <local:MsbCheckIconWidthConverter x:Key="MsbCheckIconWidthConverter" />
+    
+    <local:RingProgressBarConverter x:Key="RingProgressBarConverter" />
+    <local:NullableColorToColoConverter x:Key="NullableColorToColoConverter" />
+    <local:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
+
+</ResourceDictionary>

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="YouiToolkit.Design.LightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YouiToolkit.Design"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50"
+             x:Name="self"
+             Foreground="#AAAAAA">
+    <Grid x:Name="gridRoot">
+        <Path Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Path.Data>
+                <GeometryGroup>
+                    <EllipseGeometry RadiusX="20" RadiusY="20"  Center="20,20"/>
+                </GeometryGroup>
+            </Path.Data>
+        </Path>
+        <Path Fill="#AAAAAA" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Path.Data>
+                <GeometryGroup>
+                    <EllipseGeometry RadiusX="21" RadiusY="21"  Center="20,20"/>
+                    <EllipseGeometry RadiusX="20" RadiusY="20"  Center="20,20"/>
+                </GeometryGroup>
+            </Path.Data>
+        </Path>
+        <TextBlock x:Name="textBlock" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{Binding ElementName=self,Path=FontSize}" Foreground="{Binding ElementName=self,Path=Foreground}"/>
+    </Grid>
+</UserControl>

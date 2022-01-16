@@ -1,0 +1,1370 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?x2wj7e');
+  src:  url('fonts/icomoon.eot?x2wj7e#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?x2wj7e') format('truetype'),
+    url('fonts/icomoon.woff?x2wj7e') format('woff'),
+    url('fonts/icomoon.svg?x2wj7e#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-upload_batch .path1:before {
+  content: "\ea4b";
+  color: rgb(114, 114, 114);
+}
+.icon-upload_batch .path2:before {
+  content: "\ea4c";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_cloud .path1:before {
+  content: "\ea4d";
+  color: rgb(230, 195, 124);
+}
+.icon-upload_cloud .path2:before {
+  content: "\ea4e";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-upload_cloud .path3:before {
+  content: "\ea4f";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_data .path1:before {
+  content: "\ea50";
+  color: rgb(230, 194, 124);
+}
+.icon-upload_data .path2:before {
+  content: "\ea51";
+  margin-left: -1em;
+  color: rgb(230, 194, 124);
+}
+.icon-upload_data .path3:before {
+  content: "\ea52";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-upload_data .path4:before {
+  content: "\ea53";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_drawing .path1:before {
+  content: "\ea54";
+  color: rgb(82, 128, 193);
+}
+.icon-upload_drawing .path2:before {
+  content: "\ea55";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-upload_drawing .path3:before {
+  content: "\ea56";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-upload_drawing .path4:before {
+  content: "\ea57";
+  margin-left: -1em;
+  color: rgb(191, 209, 235);
+}
+.icon-upload_drawing .path5:before {
+  content: "\ea58";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_form .path1:before {
+  content: "\ea59";
+  color: rgb(82, 128, 193);
+}
+.icon-upload_form .path2:before {
+  content: "\ea5a";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-upload_form .path3:before {
+  content: "\ea5b";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_form .path4:before {
+  content: "\ea5c";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-upload_import .path1:before {
+  content: "\ea5d";
+  color: rgb(114, 114, 114);
+}
+.icon-upload_import .path2:before {
+  content: "\ea5e";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_templete .path1:before {
+  content: "\ea5f";
+  color: rgb(114, 114, 114);
+}
+.icon-upload_templete .path2:before {
+  content: "\ea60";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-upload_templete .path3:before {
+  content: "\ea61";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-upload_templete .path4:before {
+  content: "\ea62";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-submit_form .path1:before {
+  content: "\ea63";
+  color: rgb(73, 124, 173);
+}
+.icon-submit_form .path2:before {
+  content: "\ea64";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-submit_form .path3:before {
+  content: "\ea65";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-submit_form .path4:before {
+  content: "\ea66";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-submit_publish .path1:before {
+  content: "\ea67";
+  color: rgb(114, 114, 114);
+}
+.icon-submit_publish .path2:before {
+  content: "\ea68";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_batch .path1:before {
+  content: "\ea69";
+  color: rgb(114, 114, 114);
+}
+.icon-download_batch .path2:before {
+  content: "\ea6a";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_cloud .path1:before {
+  content: "\ea6b";
+  color: rgb(230, 195, 124);
+}
+.icon-download_cloud .path2:before {
+  content: "\ea6c";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-download_cloud .path3:before {
+  content: "\ea6d";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_data .path1:before {
+  content: "\ea6e";
+  color: rgb(230, 194, 124);
+}
+.icon-download_data .path2:before {
+  content: "\ea6f";
+  margin-left: -1em;
+  color: rgb(230, 194, 124);
+}
+.icon-download_data .path3:before {
+  content: "\ea70";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-download_data .path4:before {
+  content: "\ea71";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_doc .path1:before {
+  content: "\ea72";
+  color: rgb(82, 128, 193);
+}
+.icon-download_doc .path2:before {
+  content: "\ea73";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-download_doc .path3:before {
+  content: "\ea74";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_doc .path4:before {
+  content: "\ea75";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-download_drawing .path1:before {
+  content: "\ea76";
+  color: rgb(114, 114, 114);
+}
+.icon-download_drawing .path2:before {
+  content: "\ea77";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_drawing .path3:before {
+  content: "\ea78";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-download_drawing .path4:before {
+  content: "\ea79";
+  margin-left: -1em;
+  color: rgb(191, 209, 235);
+}
+.icon-download_drawing .path5:before {
+  content: "\ea7a";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_import .path1:before {
+  content: "\ea7b";
+  color: rgb(114, 114, 114);
+}
+.icon-download_import .path2:before {
+  content: "\ea7c";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_templetesvg .path1:before {
+  content: "\ea7d";
+  color: rgb(114, 114, 114);
+}
+.icon-download_templetesvg .path2:before {
+  content: "\ea7e";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-download_templetesvg .path3:before {
+  content: "\ea7f";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-download_templetesvg .path4:before {
+  content: "\ea80";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-close:before {
+  content: "\ea40";
+  color: #ce6043;
+}
+.icon-remove:before {
+  content: "\ea41";
+  color: #ce6043;
+}
+.icon-remove_file .path1:before {
+  content: "\ea42";
+  color: rgb(114, 114, 114);
+}
+.icon-remove_file .path2:before {
+  content: "\ea43";
+  margin-left: -1em;
+  color: rgb(206, 96, 67);
+}
+.icon-remove_form .path1:before {
+  content: "\ea44";
+  color: rgb(114, 114, 114);
+}
+.icon-remove_form .path2:before {
+  content: "\ea45";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-remove_form .path3:before {
+  content: "\ea46";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-remove_form .path4:before {
+  content: "\ea47";
+  margin-left: -1em;
+  color: rgb(206, 96, 67);
+}
+.icon-remove_pel .path1:before {
+  content: "\ea48";
+  color: rgb(114, 114, 114);
+}
+.icon-remove_pel .path2:before {
+  content: "\ea49";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-remove_pel .path3:before {
+  content: "\ea4a";
+  margin-left: -1em;
+  color: rgb(206, 96, 67);
+}
+.icon-refresh_page .path1:before {
+  content: "\ea1d";
+  color: rgb(114, 114, 114);
+}
+.icon-refresh_page .path2:before {
+  content: "\ea1e";
+  margin-left: -1em;
+  color: rgb(206, 96, 67);
+}
+.icon-refresh_data .path1:before {
+  content: "\ea1f";
+  color: rgb(206, 96, 67);
+}
+.icon-refresh_data .path2:before {
+  content: "\ea20";
+  margin-left: -1em;
+  color: rgb(230, 194, 124);
+}
+.icon-refresh_data .path3:before {
+  content: "\ea21";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-refresh:before {
+  content: "\ea22";
+  color: #497cad;
+}
+.icon-save:before {
+  content: "\ea23";
+  color: #80559f;
+}
+.icon-save_project .path1:before {
+  content: "\ea24";
+  color: rgb(114, 114, 114);
+}
+.icon-save_project .path2:before {
+  content: "\ea25";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-save_project .path3:before {
+  content: "\ea26";
+  margin-left: -1em;
+  color: rgb(230, 195, 125);
+}
+.icon-save_project .path4:before {
+  content: "\ea27";
+  margin-left: -1em;
+  color: rgb(207, 208, 208);
+}
+.icon-save_project .path5:before {
+  content: "\ea28";
+  margin-left: -1em;
+  color: rgb(128, 85, 159);
+}
+.icon-save_project .path6:before {
+  content: "\ea29";
+  margin-left: -1em;
+  color: rgb(128, 85, 159);
+}
+.icon-save_cancel .path1:before {
+  content: "\ea2a";
+  color: rgb(137, 89, 171);
+}
+.icon-save_cancel .path2:before {
+  content: "\ea2b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-save_cancel .path3:before {
+  content: "\ea2c";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-save_cancel .path4:before {
+  content: "\ea2d";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-save_cancel .path5:before {
+  content: "\ea2e";
+  margin-left: -1em;
+  color: rgb(206, 96, 67);
+}
+.icon-save_publish .path1:before {
+  content: "\ea2f";
+  color: rgb(137, 89, 171);
+}
+.icon-save_publish .path2:before {
+  content: "\ea30";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-save_publish .path3:before {
+  content: "\ea31";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-save_publish .path4:before {
+  content: "\ea32";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-save_publish .path5:before {
+  content: "\ea33";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-save_publish .path6:before {
+  content: "\ea34";
+  margin-left: -1em;
+  color: rgb(82, 128, 193);
+}
+.icon-open .path1:before {
+  content: "\ea35";
+  color: rgb(228, 198, 81);
+}
+.icon-open .path2:before {
+  content: "\ea36";
+  margin-left: -1em;
+  color: rgb(230, 194, 124);
+}
+.icon-open .path3:before {
+  content: "\ea37";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-open .path4:before {
+  content: "\ea38";
+  margin-left: -1em;
+  color: rgb(60, 174, 213);
+}
+.icon-open_templete .path1:before {
+  content: "\ea39";
+  color: rgb(114, 114, 114);
+}
+.icon-open_templete .path2:before {
+  content: "\ea3a";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-open_templete .path3:before {
+  content: "\ea3b";
+  margin-left: -1em;
+  color: rgb(178, 178, 178);
+}
+.icon-open_templete .path4:before {
+  content: "\ea3c";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-open_project .path1:before {
+  content: "\ea3d";
+  color: rgb(73, 124, 173);
+}
+.icon-open_project .path2:before {
+  content: "\ea3e";
+  margin-left: -1em;
+  color: rgb(189, 205, 232);
+}
+.icon-open_project .path3:before {
+  content: "\ea3f";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-clipboard_copy .path1:before {
+  content: "\ea10";
+  color: rgb(73, 124, 173);
+}
+.icon-clipboard_copy .path2:before {
+  content: "\ea11";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-clipboard_copy .path3:before {
+  content: "\ea12";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-clipboard_cut .path1:before {
+  content: "\ea13";
+  color: rgb(127, 128, 128);
+}
+.icon-clipboard_cut .path2:before {
+  content: "\ea14";
+  margin-left: -1em;
+  color: rgb(73, 124, 173);
+}
+.icon-clipboard_paste .path1:before {
+  content: "\ea15";
+  color: rgb(3, 0, 0);
+}
+.icon-clipboard_paste .path2:before {
+  content: "\ea16";
+  margin-left: -1em;
+  color: rgb(230, 194, 124);
+}
+.icon-clipboard_paste .path3:before {
+  content: "\ea17";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-clipboard_paste .path4:before {
+  content: "\ea18";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-clipboard_paste .path5:before {
+  content: "\ea19";
+  margin-left: -1em;
+  color: rgb(114, 114, 114);
+}
+.icon-redo:before {
+  content: "\ea1a";
+  color: #497cad;
+}
+.icon-undo:before {
+  content: "\ea1b";
+  color: #497cad;
+}
+.icon-delete:before {
+  content: "\ea1c";
+}
+.icon-download:before {
+  content: "\ea0e";
+}
+.icon-upload:before {
+  content: "\ea0f";
+}
+.icon-win-close:before {
+  content: "\ea09";
+}
+.icon-win-maximize:before {
+  content: "\ea0a";
+}
+.icon-win-minimize:before {
+  content: "\ea0b";
+}
+.icon-win-restore:before {
+  content: "\ea0c";
+}
+.icon-win-restore-w11:before {
+  content: "\ea0d";
+}
+.icon-pointer:before {
+  content: "\ea08";
+}
+.icon-scale:before {
+  content: "\ea07";
+}
+.icon-point-origin:before {
+  content: "\ea05";
+}
+.icon-quick-render:before {
+  content: "\ea06";
+}
+.icon-debug:before {
+  content: "\ea04";
+}
+.icon-hide_left_bar:before {
+  content: "\ea03";
+}
+.icon-_02diantixinxi:before {
+  content: "\e900";
+}
+.icon-activity-l:before {
+  content: "\e901";
+}
+.icon-adjust_marker:before {
+  content: "\e902";
+}
+.icon-agvguanli:before {
+  content: "\e903";
+}
+.icon-assembly-f:before {
+  content: "\e904";
+}
+.icon-assignmentturnedin:before {
+  content: "\e905";
+}
+.icon-audio_capture:before {
+  content: "\e906";
+}
+.icon-audio_playback:before {
+  content: "\e907";
+}
+.icon-audio_stop:before {
+  content: "\e908";
+}
+.icon-avoid_marker:before {
+  content: "\e909";
+}
+.icon-bangzhu:before {
+  content: "\e90a";
+}
+.icon-barcode_scanning:before {
+  content: "\e90b";
+}
+.icon-battery_charge:before {
+  content: "\e90c";
+}
+.icon-bianji:before {
+  content: "\e90d";
+}
+.icon-bianjiditubeijing:before {
+  content: "\e90e";
+}
+.icon-bofang1:before {
+  content: "\e90f";
+}
+.icon-brush:before {
+  content: "\e910";
+}
+.icon-cabinet_patrol_inspection:before {
+  content: "\e911";
+}
+.icon-calibration:before {
+  content: "\e912";
+}
+.icon-camera:before {
+  content: "\e913";
+}
+.icon-camera_2d_switch:before {
+  content: "\e914";
+}
+.icon-camera_3d_data_acquisition:before {
+  content: "\e915";
+}
+.icon-camera_photograph:before {
+  content: "\e916";
+}
+.icon-charge_station_point:before {
+  content: "\e917";
+}
+.icon-charging:before {
+  content: "\e918";
+}
+.icon-charging_marker:before {
+  content: "\e919";
+}
+.icon-check_plc:before {
+  content: "\e91a";
+}
+.icon-chenggong:before {
+  content: "\e91b";
+}
+.icon-clamp_hug:before {
+  content: "\e91c";
+}
+.icon-clamps_left_right_operate:before {
+  content: "\e91d";
+}
+.icon-cn:before {
+  content: "\e91e";
+}
+.icon-comment-pen:before {
+  content: "\e91f";
+}
+.icon-connecting_frame:before {
+  content: "\e920";
+}
+.icon-cuo:before {
+  content: "\e921";
+}
+.icon-cuowu1:before {
+  content: "\e922";
+}
+.icon-daohang1:before {
+  content: "\e923";
+}
+.icon-daoru:before {
+  content: "\e924";
+}
+.icon-default:before {
+  content: "\e925";
+}
+.icon-deguo:before {
+  content: "\e926";
+}
+.icon-delete-f:before {
+  content: "\e927";
+}
+.icon-dengdai:before {
+  content: "\e928";
+}
+.icon-dense_cabinet:before {
+  content: "\e929";
+}
+.icon-device:before {
+  content: "\e92a";
+}
+.icon-device_operate_apply:before {
+  content: "\e92b";
+}
+.icon-device_operate_reply:before {
+  content: "\e92c";
+}
+.icon-dianliang:before {
+  content: "\e92d";
+}
+.icon-diaodujihua:before {
+  content: "\e92e";
+}
+.icon-diaodujihuanew:before {
+  content: "\e92f";
+}
+.icon-diaodupeizhi:before {
+  content: "\e930";
+}
+.icon-ditu:before {
+  content: "\e931";
+}
+.icon-ditupeizhi:before {
+  content: "\e932";
+}
+.icon-donghuoxukezheng:before {
+  content: "\e933";
+}
+.icon-duankai:before {
+  content: "\e934";
+}
+.icon-duilie1:before {
+  content: "\e935";
+}
+.icon-duogewenjian:before {
+  content: "\e936";
+}
+.icon-electric_cabinet_qr_code_scanning:before {
+  content: "\e937";
+}
+.icon-elevator_marker:before {
+  content: "\e938";
+}
+.icon-en:before {
+  content: "\e939";
+}
+.icon-fangxingtingzhi:before {
+  content: "\e93a";
+}
+.icon-featrue-point:before {
+  content: "\e93b";
+}
+.icon-file_capture:before {
+  content: "\e93c";
+}
+.icon-fill_light:before {
+  content: "\e93d";
+}
+.icon-fx:before {
+  content: "\e93e";
+}
+.icon-gas_detection:before {
+  content: "\e93f";
+}
+.icon-gas_threshold:before {
+  content: "\e940";
+}
+.icon-get_inventory_result:before {
+  content: "\e941";
+}
+.icon-gongju:before {
+  content: "\e942";
+}
+.icon-gongzuo:before {
+  content: "\e943";
+}
+.icon-gripper:before {
+  content: "\e944";
+}
+.icon-houchadian:before {
+  content: "\e945";
+}
+.icon-http_post_request:before {
+  content: "\e946";
+}
+.icon-huaban1:before {
+  content: "\e947";
+}
+.icon-huaban2:before {
+  content: "\e948";
+}
+.icon-huabi:before {
+  content: "\e949";
+}
+.icon-human_disinfect:before {
+  content: "\e94a";
+}
+.icon-ic_gps_fixed_px:before {
+  content: "\e94b";
+}
+.icon-ic_gps_not_fixed_p:before {
+  content: "\e94c";
+}
+.icon-icon02:before {
+  content: "\e94d";
+}
+.icon-rizhi-copy:before {
+  content: "\e94e";
+}
+.icon-test:before {
+  content: "\e94f";
+}
+.icon-if_else:before {
+  content: "\e950";
+}
+.icon-infrared:before {
+  content: "\e951";
+}
+.icon-initial_marker:before {
+  content: "\e952";
+}
+.icon-inventory_result:before {
+  content: "\e953";
+}
+.icon-jacking_mechanism:before {
+  content: "\e954";
+}
+.icon-jianceqi:before {
+  content: "\e955";
+}
+.icon-jiang1:before {
+  content: "\e956";
+}
+.icon-jiantouleft:before {
+  content: "\e957";
+}
+.icon-jiantouright:before {
+  content: "\e958";
+}
+.icon-jiazai1:before {
+  content: "\e959";
+}
+.icon-jietu:before {
+  content: "\e95a";
+}
+.icon-jinyong:before {
+  content: "\e95b";
+}
+.icon-jinyong1:before {
+  content: "\e95c";
+}
+.icon-jinzhi:before {
+  content: "\e95d";
+}
+.icon-jiqiren:before {
+  content: "\e95e";
+}
+.icon-jiqiren1:before {
+  content: "\e95f";
+}
+.icon-jiqirentype:before {
+  content: "\e960";
+}
+.icon-kaishi:before {
+  content: "\e961";
+}
+.icon-kelong:before {
+  content: "\e962";
+}
+.icon-kuangxuan:before {
+  content: "\e963";
+}
+.icon-kuangxuan1:before {
+  content: "\e964";
+}
+.icon-lifting_columns:before {
+  content: "\e965";
+}
+.icon-lifting_platform:before {
+  content: "\e966";
+}
+.icon-line:before {
+  content: "\e967";
+}
+.icon-link:before {
+  content: "\e968";
+}
+.icon-link1:before {
+  content: "\e969";
+}
+.icon-loop_work:before {
+  content: "\e96a";
+}
+.icon-louceng:before {
+  content: "\e96b";
+}
+.icon-manipulator_arm:before {
+  content: "\e96c";
+}
+.icon-manipulator_arm_start:before {
+  content: "\e96d";
+}
+.icon-manipulator_end_operation:before {
+  content: "\e96e";
+}
+.icon-manipulator_motion_control:before {
+  content: "\e96f";
+}
+.icon-mast:before {
+  content: "\e970";
+}
+.icon-mechanical_arm_end_change:before {
+  content: "\e971";
+}
+.icon-modbus:before {
+  content: "\e972";
+}
+.icon-move:before {
+  content: "\e973";
+}
+.icon-move_docking:before {
+  content: "\e974";
+}
+.icon-move_inventory:before {
+  content: "\e975";
+}
+.icon-move_relative:before {
+  content: "\e976";
+}
+.icon-move_rotate:before {
+  content: "\e977";
+}
+.icon-move_side_path:before {
+  content: "\e978";
+}
+.icon-move_to_position:before {
+  content: "\e979";
+}
+.icon-move_to_specified_area:before {
+  content: "\e97a";
+}
+.icon-msnui-refresh-line:before {
+  content: "\e97b";
+}
+.icon-navigation_marker:before {
+  content: "\e97c";
+}
+.icon-noise_sensor:before {
+  content: "\e97d";
+}
+.icon-operation_electric_cabinet:before {
+  content: "\e97e";
+}
+.icon-patrol_task:before {
+  content: "\e97f";
+}
+.icon-pd_detection:before {
+  content: "\e980";
+}
+.icon-peizhi:before {
+  content: "\e981";
+}
+.icon-picinpic:before {
+  content: "\e982";
+}
+.icon-picinpics:before {
+  content: "\e983";
+}
+.icon-plc:before {
+  content: "\e984";
+}
+.icon-plug_in_motor:before {
+  content: "\e985";
+}
+.icon-position_aruco_code:before {
+  content: "\e986";
+}
+.icon-position-fn:before {
+  content: "\e987";
+}
+.icon-projection_calibration:before {
+  content: "\e988";
+}
+.icon-ptz_camera:before {
+  content: "\e989";
+}
+.icon-qianchadian:before {
+  content: "\e98a";
+}
+.icon-qiyong:before {
+  content: "\e98b";
+}
+.icon-qr_code:before {
+  content: "\e98c";
+}
+.icon-qr_code_scanning:before {
+  content: "\e98d";
+}
+.icon-qrcode_marker:before {
+  content: "\e98e";
+}
+.icon-query_locating_pin:before {
+  content: "\e98f";
+}
+.icon-quxian:before {
+  content: "\e990";
+}
+.icon-quxianjiantou:before {
+  content: "\e991";
+}
+.icon-quxiao:before {
+  content: "\e992";
+}
+.icon-quyu:before {
+  content: "\e993";
+}
+.icon-quyubiaozhu:before {
+  content: "\e994";
+}
+.icon-quyuhuizhi:before {
+  content: "\e995";
+}
+.icon-random_move_side_path:before {
+  content: "\e996";
+}
+.icon-reflector_point:before {
+  content: "\e997";
+}
+.icon-release:before {
+  content: "\e998";
+}
+.icon-remote_plc:before {
+  content: "\e999";
+}
+.icon-remotely_plc:before {
+  content: "\e99a";
+}
+.icon-renwuliebiao:before {
+  content: "\e99b";
+}
+.icon-return:before {
+  content: "\e99c";
+}
+.icon-reverse_manipulator_arm:before {
+  content: "\e99d";
+}
+.icon-rfid_check_code:before {
+  content: "\e99e";
+}
+.icon-rfid_scan:before {
+  content: "\e99f";
+}
+.icon-roller:before {
+  content: "\e9a0";
+}
+.icon-roller_and_transformer:before {
+  content: "\e9a1";
+}
+.icon-roller_left_right_operate:before {
+  content: "\e9a2";
+}
+.icon-roller_up_down:before {
+  content: "\e9a3";
+}
+.icon-roller_width:before {
+  content: "\e9a4";
+}
+.icon-runtime_input:before {
+  content: "\e9a5";
+}
+.icon-script_manipulator_arm:before {
+  content: "\e9a6";
+}
+.icon-sensor:before {
+  content: "\e9a7";
+}
+.icon-set_inventory_info:before {
+  content: "\e9a8";
+}
+.icon-shanchu:before {
+  content: "\e9a9";
+}
+.icon-shanchu1:before {
+  content: "\e9aa";
+}
+.icon-shebei:before {
+  content: "\e9ab";
+}
+.icon-shelf_alignment:before {
+  content: "\e9ac";
+}
+.icon-shelf_follow_up:before {
+  content: "\e9ad";
+}
+.icon-shelf_rotation:before {
+  content: "\e9ae";
+}
+.icon-shezhi:before {
+  content: "\e9af";
+}
+.icon-shezhi1:before {
+  content: "\e9b0";
+}
+.icon-shoudong:before {
+  content: "\e9b1";
+}
+.icon-shouqianniuicon:before {
+  content: "\e9b2";
+}
+.icon-shuangxiangjiantou2:before {
+  content: "\e9b3";
+}
+.icon-shuangxiangjiantou4:before {
+  content: "\e9b4";
+}
+.icon-six_sulfur_fluoride_detection:before {
+  content: "\e9b5";
+}
+.icon-specify_move:before {
+  content: "\e9b6";
+}
+.icon-stauto:before {
+  content: "\e9b7";
+}
+.icon-stditutuichuquanping:before {
+  content: "\e9b8";
+}
+.icon-sterilizing_lamp:before {
+  content: "\e9b9";
+}
+.icon-stfangda:before {
+  content: "\e9ba";
+}
+.icon-stquanping:before {
+  content: "\e9bb";
+}
+.icon-stsuoxiao:before {
+  content: "\e9bc";
+}
+.icon-stxuanzhuan:before {
+  content: "\e9bd";
+}
+.icon-styidong:before {
+  content: "\e9be";
+}
+.icon-switch_avoiding_obstacles_area:before {
+  content: "\e9bf";
+}
+.icon-switch_map:before {
+  content: "\e9c0";
+}
+.icon-tbaocun:before {
+  content: "\e9c1";
+}
+.icon-tbofang:before {
+  content: "\e9c2";
+}
+.icon-tcase_tingzhi:before {
+  content: "\e9c3";
+}
+.icon-tdaohang:before {
+  content: "\e9c4";
+}
+.icon-telescopic_motor:before {
+  content: "\e9c5";
+}
+.icon-temperature_and_humidity:before {
+  content: "\e9c6";
+}
+.icon-temperature_and_humidity_and_pm:before {
+  content: "\e9c7";
+}
+.icon-tingkao:before {
+  content: "\e9c8";
+}
+.icon-tingzhi:before {
+  content: "\e9c9";
+}
+.icon-tlianjie:before {
+  content: "\e9ca";
+}
+.icon-tongji:before {
+  content: "\e9cb";
+}
+.icon-touxiang:before {
+  content: "\e9cc";
+}
+.icon-transformer:before {
+  content: "\e9cd";
+}
+.icon-tray_forward:before {
+  content: "\e9ce";
+}
+.icon-tray_lifting:before {
+  content: "\e9cf";
+}
+.icon-trigger:before {
+  content: "\e9d0";
+}
+.icon-try_catch:before {
+  content: "\e9d1";
+}
+.icon-tuceng:before {
+  content: "\e9d2";
+}
+.icon-tuichu1:before {
+  content: "\e9d3";
+}
+.icon-tupian:before {
+  content: "\e9d4";
+}
+.icon-tupiantihuantupian:before {
+  content: "\e9d5";
+}
+.icon-tzanting:before {
+  content: "\e9d6";
+}
+.icon-daochu:before {
+  content: "\e9d7";
+}
+.icon-ur:before {
+  content: "\e9d8";
+}
+.icon-v_point:before {
+  content: "\e9d9";
+}
+.icon-variable_runtime_setting:before {
+  content: "\e9da";
+}
+.icon-variable_setting:before {
+  content: "\e9db";
+}
+.icon-visual_grabbing:before {
+  content: "\e9dc";
+}
+.icon-visual_inventory:before {
+  content: "\e9dd";
+}
+.icon-visual_jack:before {
+  content: "\e9de";
+}
+.icon-wait:before {
+  content: "\e9df";
+}
+.icon-wait_marker:before {
+  content: "\e9e0";
+}
+.icon-weibao:before {
+  content: "\e9e1";
+}
+.icon-weizhi1:before {
+  content: "\e9e2";
+}
+.icon-while:before {
+  content: "\e9e3";
+}
+.icon-window_file:before {
+  content: "\e9e4";
+}
+.icon-wocanyudexiangmu:before {
+  content: "\e9e5";
+}
+.icon-work_marker:before {
+  content: "\e9e6";
+}
+.icon-xiala1:before {
+  content: "\e9e7";
+}
+.icon-xian:before {
+  content: "\e9e8";
+}
+.icon-xian1:before {
+  content: "\e9e9";
+}
+.icon-xian3:before {
+  content: "\e9ea";
+}
+.icon-xiangpi:before {
+  content: "\e9eb";
+}
+.icon-xiaoxi:before {
+  content: "\e9ec";
+}
+.icon-xinzeng:before {
+  content: "\e9ed";
+}
+.icon-xitong:before {
+  content: "\e9ee";
+}
+.icon-xuanzhuan:before {
+  content: "\e9ef";
+}
+.icon-xuanzhuan1:before {
+  content: "\e9f0";
+}
+.icon-xunhuan:before {
+  content: "\e9f1";
+}
+.icon-yibiaoban:before {
+  content: "\e9f2";
+}
+.icon-yuandian:before {
+  content: "\e9f3";
+}
+.icon-yuanquan:before {
+  content: "\e9f4";
+}
+.icon-yulan:before {
+  content: "\e9f5";
+}
+.icon-zhengfangxing:before {
+  content: "\e9f6";
+}
+.icon-zhiding:before {
+  content: "\e9f7";
+}
+.icon-zhihang:before {
+  content: "\e9f8";
+}
+.icon-zhihangrenwu:before {
+  content: "\e9f9";
+}
+.icon-zhixingzhuangtai:before {
+  content: "\e9fa";
+}
+.icon-zhongxinkaishi:before {
+  content: "\e9fb";
+}
+.icon-zhuxiao:before {
+  content: "\e9fc";
+}
+.icon-zidong1:before {
+  content: "\e9fd";
+}
+.icon-zidongmen:before {
+  content: "\e9fe";
+}
+.icon-zidongqianx:before {
+  content: "\e9ff";
+}
+.icon-ziyuan:before {
+  content: "\ea00";
+}
+.icon-ziyuan1:before {
+  content: "\ea01";
+}
+.icon-zuoyoutuodong:before {
+  content: "\ea02";
+}

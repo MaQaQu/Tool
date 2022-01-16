@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="Default_FontSize">14</sys:Double>
+    <FontFamily x:Key="FontYahei">Microsoft Yahei UI</FontFamily>
+
+    <sys:Boolean x:Key="Default_SnapsToDevicePixels">False</sys:Boolean>
+    <sys:String x:Key="Button_WaitingContent" xml:space="preserve">  请稍候...</sys:String>
+
+    <FontFamily x:Key="FontAwesome">/YouiToolkit.Design;component/Resources/#fontawesome</FontFamily>
+    <FontFamily x:Key="IcoMoon">/YouiToolkit.Design;component/Resources/#icomoon</FontFamily>
+</ResourceDictionary>

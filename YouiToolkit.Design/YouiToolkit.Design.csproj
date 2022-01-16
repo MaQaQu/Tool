@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<LangVersion>10.0</LangVersion>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\fontawesome.ttf" />
+    <None Remove="Resources\icomoon.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\fontawesome.ttf" />
+    <Resource Include="Resources\icomoon.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\Window\WindowXStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YouiToolkit.Logging\YouiToolkit.Logging.csproj" />
+    <ProjectReference Include="..\YouiToolkit.Utils\YouiToolkit.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+</Project>

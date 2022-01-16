@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>enable</Nullable>
+	<LangVersion>10.0</LangVersion>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+</Project>

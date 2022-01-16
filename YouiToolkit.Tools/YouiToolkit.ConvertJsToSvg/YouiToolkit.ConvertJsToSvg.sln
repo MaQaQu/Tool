@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouiToolkit.ConvertJsToSvg", "YouiToolkit.ConvertJsToSvg.csproj", "{DB4D57C9-5F82-4663-AC79-BCD8F466946D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB4D57C9-5F82-4663-AC79-BCD8F466946D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4D57C9-5F82-4663-AC79-BCD8F466946D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4D57C9-5F82-4663-AC79-BCD8F466946D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4D57C9-5F82-4663-AC79-BCD8F466946D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F947A346-646C-46F8-9703-29A177200BCB}
+	EndGlobalSection
+EndGlobal

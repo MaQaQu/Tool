@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+	<LangVersion>10.0</LangVersion>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YouiToolkit.Logging\YouiToolkit.Logging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+</Project>

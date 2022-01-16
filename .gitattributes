@@ -1,0 +1,8 @@
+*.html linguist-language=JavaScript
+*.css linguist-language=JavaScript
+*.js linguist-detectable=true
+YouiToolkit.Design/Resources/icomoon/demo-files/*.js linguist-vendored
+YouiToolkit.Design/Resources/icomoon/demo-files/*.css linguist-vendored
+YouiToolkit.Design/Resources/icomoon/*.html linguist-vendored
+YouiToolkit.Design/Resources/icomoon/*.css linguist-vendored
+YouiToolkit.Design/Resources/icomoon/*.json linguist-vendored
