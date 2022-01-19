@@ -17,6 +17,7 @@ namespace YouiToolkit.Views
         public PageRobot PageRobot { get; private set; }
         public PageMap PageMap { get; private set; }
         public PageAvoidObstacle PageAvoidObstacle { get; private set; }
+        public PageMaintain PageMaintain { get; private set; }
 
         public MainWindow()
         {
@@ -28,6 +29,7 @@ namespace YouiToolkit.Views
             PageRobot = new PageRobot();
             PageMap = new PageMap();
             PageAvoidObstacle = new PageAvoidObstacle();
+            PageMaintain = new PageMaintain();
 
             Loaded += (s, e) => LoadPage(PageRobot);
 
@@ -117,6 +119,9 @@ namespace YouiToolkit.Views
                         break;
                     case PageTag.AvoidObstacle:
                         LoadPage(PageAvoidObstacle);
+                        break;
+                    case PageTag.Maintain:
+                        LoadPage(PageMaintain);
                         break;
                     default:
                         LoadPage(null);

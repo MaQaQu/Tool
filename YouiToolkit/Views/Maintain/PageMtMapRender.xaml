@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="YouiToolkit.Views.Maintain.PageMtMapRender"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YouiToolkit.Views"
+             xmlns:ui="https://youibot.com/YouiToolkit.Design"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="gridRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="stackPanelFunc" Orientation="Horizontal">
+            <ui:Blank Width="10"/>
+            <Button x:Name="buttonStart" Height="25" Width="65"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="5,10,0,0"
+                    Background="#5AAD62"
+                    ui:ButtonHelper.HoverBrush="#6EC180"
+                    ui:ButtonHelper.CornerRadius="5">
+                <Button.Content>
+                    <TextBlock>
+                        <Run Text="&#xe9c2;" FontFamily="{StaticResource IcoMoon}" />
+                        <ContentControl>
+                            <ContentControl.Content>
+                                <TextBlock Text="开始" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <Button x:Name="buttonRelocalization" Height="25" Width="75"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="5,10,0,0"
+                    Background="#5A94AD"
+                    ui:ButtonHelper.HoverBrush="#6EA8C1"
+                    ui:ButtonHelper.CornerRadius="5">
+                <Button.Content>
+                    <TextBlock>
+                        <Run Text="&#xe94b;" FontFamily="{StaticResource IcoMoon}" />
+                        <ContentControl>
+                            <ContentControl.Content>
+                                <TextBlock Text="重定位" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                </Button.Content>
+                <Button.ContextMenu>
+                    <ContextMenu ui:IconHelper.Width="45"
+                                 ui:ContextMenuHelper.CornerRadius="5"
+                                 Padding="0,5" Width="250" FontSize="12">
+                        <MenuItem x:Name="menuItemRelocalizationAuto" Header="自动重定位" Icon="&#xe94b;"/>
+                        <MenuItem x:Name="menuItemRelocalizationManual" Header="手动重定位" Icon="&#xe9b1;"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button x:Name="buttonSave" Height="25" Width="65"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="5,10,0,0"
+                    Background="#5A94AD"
+                    ui:ButtonHelper.HoverBrush="#6EA8C1"
+                    ui:ButtonHelper.CornerRadius="5">
+                <Button.Content>
+                    <TextBlock>
+                        <Run Text="&#xe9c1;" FontFamily="{StaticResource IcoMoon}" />
+                        <ContentControl>
+                            <ContentControl.Content>
+                                <TextBlock Text="保存" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <Button x:Name="buttonCancel" Height="25" Width="65"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="5,10,0,0"
+                    Background="#DA5F5F"
+                    ui:ButtonHelper.HoverBrush="#EE7373"
+                    ui:ButtonHelper.CornerRadius="5">
+                <Button.Content>
+                    <TextBlock>
+                        <Run Text="&#xe9c3;" FontFamily="{StaticResource IcoMoon}"/>
+                        <ContentControl Margin="-3,0,0,0">
+                            <ContentControl.Content>
+                                <TextBlock Text="取消" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <Button x:Name="buttonBack" Height="25" Width="65"
+                FontFamily="{StaticResource IcoMoon}"
+                HorizontalAlignment="Right"
+                Margin="5,10,0,0"
+                Background="#5A94AD"
+                ui:ButtonHelper.HoverBrush="#6EA8C1"
+                ui:ButtonHelper.CornerRadius="5">
+                <Button.Content>
+                    <TextBlock>
+                    <ContentControl Margin="0,0,0,0" FontFamily="{StaticResource IcoMoon}">
+                        <ContentControl.Content>
+                            <TextBlock Text="&#xea1b;" />
+                        </ContentControl.Content>
+                    </ContentControl>
+                    <ContentControl Margin="-2,0,0,0">
+                        <ContentControl.Content>
+                            <TextBlock Text="返回" />
+                        </ContentControl.Content>
+                    </ContentControl>
+                </TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1" x:Name="gridContent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="23" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="gridRender" Grid.Row="0">
+                <!--<local:MapRenderComponent x:Name="mapRender"/>-->
+                <!--<local:MapRenderImage x:Name="mapRender"/>-->
+                <local:MapRenderControl x:Name="mapRender" Visibility="Visible"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">
+                <TextBlock MinWidth="50" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="FPS"/>
+                    <Run Foreground="#3E7F2A" Text="{Binding ElementName=mapRender,Path=FpsCalc.Fps}" />
+                </TextBlock>
+                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                <TextBlock MinWidth="120" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xea05;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="位置"/>
+                    <Run x:Name="runMouseLoctMap" Text="0,0"/>
+                    <Run Text="(米)"/>
+                </TextBlock>
+                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                <TextBlock MinWidth="80" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xe977;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="旋转"/>
+                    <Run x:Name="runOriginRotate" Text="0"/>
+                    <Run Text="°"/>
+                </TextBlock>
+                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                <TextBlock MinWidth="100" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xe97a;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="缩放"/>
+                    <Run x:Name="runOriginScale" Text="100%"/>
+                </TextBlock>
+                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

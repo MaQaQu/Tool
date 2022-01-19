@@ -163,7 +163,7 @@
                     </Button.Content>
                 </Button>
                 <ui:NumTextBox  x:Name="numTextBoxPlayspeed" ui:TextBoxHelper.CornerRadius="2"  MaxValue="2" Text="0.2" MinValue="0" NumType="UDecimal"  NumberLength="5" Margin="5,0,5,0"/>
-                <Slider x:Name="SliderName" Width="200" Maximum="16" TickPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True"  ValueChanged="Slider_ValueChanged"  IsMoveToPointEnabled="True"  />
+                <Slider x:Name="SliderName" Width="200" Maximum="16" TickPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"  />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" >
