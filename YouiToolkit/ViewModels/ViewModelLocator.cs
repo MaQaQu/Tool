@@ -31,7 +31,8 @@ namespace YouiToolkit.ViewModels
         public PageMapRenderViewModel PageMapRender => ServiceLocator.Current.GetInstance<PageMapRenderViewModel>();
         public PageMapListViewModel PageMapList => ServiceLocator.Current.GetInstance<PageMapListViewModel>();
         public PageAvoidObstacleViewModel PageAvoidObstacle => ServiceLocator.Current.GetInstance<PageAvoidObstacleViewModel>();
-       
+        public PageMaintainViewModel PageMaintain => ServiceLocator.Current.GetInstance<PageMaintainViewModel>();
+
         public static void Cleanup()
         {
         }
