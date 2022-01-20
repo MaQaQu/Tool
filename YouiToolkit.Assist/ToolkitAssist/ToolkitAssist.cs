@@ -321,6 +321,9 @@ namespace YouiToolkit.Assist
                         {
                             Status.LidarPointCloud.SetCount(totalCount);
                         }
+                        string str = String.Join(" ", Array.ConvertAll<float, string>(rapp.X, delegate (float s) { return s.ToString("F4"); }));
+                        string str1 = String.Join(" ", Array.ConvertAll<float, string>(rapp.Y, delegate (float s) { return s.ToString("F4"); }));
+                        //Logger.Info($"[PointCloud] Pack cloud: x:{str} y:{str1}");
                     }
                     break;
                 case AssistCmdCode.RspPointCloudPrior:
@@ -332,6 +335,8 @@ namespace YouiToolkit.Assist
                         {
                             Status.LidarPointCloud.CacheMapPriorConfig(rapp.PX, rapp.PY, rapp.PA, rapp.Resolution);
                             Status.LidarPointCloud.CacheMapPrior(rapp.PngData, (int)rapp.PngMaxLength);
+                            string str = BitConverter.ToString(rapp.PngData).Replace('-',' ');
+                            //Logger.Info($"[PointCloudPrior] Pack PngData: {str}/");
                         }
                         else
                         {
@@ -348,6 +353,7 @@ namespace YouiToolkit.Assist
                         Status.RelocalizationStatus = (AssistCmdRspMappingStatusRelocalization)rapp.LocalizationStatus;
 
                         Status.Position = new GraphPointA(rapp.X, rapp.Y, rapp.A);
+                        //Logger.Info($"[MappingStatus] Pack Position: x:{rapp.X} y:{rapp.Y} a:{rapp.A}");
 
                         Matrix baseToMap = GetTransformMatrix(rapp.X, rapp.Y, rapp.A);
 
