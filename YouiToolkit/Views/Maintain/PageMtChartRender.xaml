@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="YouiToolkit.Views.PageMtChartRender"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YouiToolkit.Views"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:ui ="clr-namespace:YouiToolkit.Design;assembly=YouiToolkit.Design"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="640">
+    <Grid x:Name="gridChart">
+        <Grid>
+            <TabControl>
+                <TabItem Header="速度" Name="chartSpeed" FontSize="15">
+                    <Grid x:Name="Chart_Speed"></Grid>
+                </TabItem>
+                <TabItem Header="角度" Name="chartAngle"  FontSize="15">
+                    <Grid x:Name="Chart_Angle"></Grid>
+                </TabItem>
+                <TabItem Header="轮速" Name="chartWheel"  FontSize="15">
+                    <Grid x:Name="Chart_Wheel"></Grid>
+                </TabItem>
+                <TabItem Header="范围" Name="chartNavigation"  FontSize="15">
+                    <Grid x:Name="Chart_Navigation"></Grid>
+                </TabItem>
+                <TabItem Header="Wlan" Name="chartWlan"  FontSize="15">
+                    <Grid x:Name="Chart_Wlan"></Grid>
+                </TabItem>
+            </TabControl>
+            <!--<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3">
+                <Button x:Name="buttonHome_Chart" Width="20"
+                            ToolTip="恢复"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe9ab;" Foreground="#E4C651"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="buttonMoveLeft_Chart" Width="20"
+                            ToolTip="左移"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe957;" Foreground="Gray"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="buttonMoveRight_Chart" Width="20"
+                            ToolTip="右移"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe958;" Foreground="Gray"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="buttonMove_Chart" Width="20"
+                            ToolTip="移动"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe9b6;" Foreground="Blue"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="buttonMagnifier_Chart" Width="20"
+                            ToolTip="放大镜"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe9ba;" Foreground="Black"/>
+                        </Grid>
+                    </Button.Content>
+
+                </Button>
+                <Button x:Name="buttonLocate_Chart" Width="20"
+                            ToolTip="定位"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xe9a8;" Foreground="Black"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="buttonSave_Chart" Width="20"
+                            ToolTip="保存"
+                            Background="Transparent"
+                            Style="{StaticResource PathButtonStyle}"
+                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                            FontFamily="{StaticResource IcoMoon}" FontSize="20" >
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Text="&#xea23;" Foreground="#80559F"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </StackPanel>-->
+        </Grid>
+    </Grid>
+</UserControl>

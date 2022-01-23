@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="YouiToolkit.Views.Maintain.Charts.PageMtChartRender_Angle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YouiToolkit.Views.Maintain.Charts"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+              d:DesignHeight="500" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*">
+            </RowDefinition>
+            <RowDefinition Height="3*">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Chart_Angle">
+            <Grid>
+                <!--Margin="75,0,75,0"-->
+                <oxy:PlotView Model="{Binding Path= PlotAngle}"></oxy:PlotView>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <GroupBox Header="位置" Margin="0,0,15,0" FontSize="15" Height="120" Width="130" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数1: 0</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数2: 0</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数3: 0</TextBlock>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Column="1">
+                <GroupBox Grid.Column="1" Header="角度" Margin="15,0,0,0" FontSize="15" Height="120" Width="130" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数1: 0</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数2: 0</TextBlock>
+                        <TextBlock Margin="5,0,0,0" FontSize="12">参数3: 0</TextBlock>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

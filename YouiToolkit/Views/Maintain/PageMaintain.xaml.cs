@@ -2,6 +2,8 @@
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,31 +26,34 @@ namespace YouiToolkit.Views
     public partial class PageMaintain : UserControl
     {
         internal PageMtMapRender PageMapRender { get; private set; }
+        internal PageMtChartRender pageMtChartRender { get; set; }
         public PageMaintain()
         {
             InitializeComponent();
             PageMapRender = new PageMtMapRender();
+            pageMtChartRender = new PageMtChartRender();
             Reload();
-            MoniSpeedChart();
         }
         private void Reload()
         {
             gridMap.ShowSubPage(PageMapRender);
+            gridChart.ShowSubPage(pageMtChartRender);
             PageMapRender.Reload(MapRenderReloadTarget.MapCapture);
         }
 
-        private void MoniSpeedChart()
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
-            ChartValues<double> Values = new ChartValues<double> { 1, 5, 2, 3, 4, 6, 1 };
-            SeriesCollection series = new SeriesCollection
+            switch (ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag)
             {
-                new LineSeries
-                {
-                    Title = "Wheel speed",
-                    Values = Values
-                }
-            };
-            s1.Series = series;
+                case false:
+                    tbPlay.Style = (Style)FindResource("iconStop");
+                    ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = true;
+                    break;
+                case true:
+                    tbPlay.Style = (Style)FindResource("iconStart");
+                    ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = false;
+                    break;
+            }
         }
     }
 }
