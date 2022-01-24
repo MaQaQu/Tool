@@ -19,7 +19,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using YouiToolkit.Design;
 using YouiToolkit.ViewModels;
-using YouiToolkit.Views.Maintain.Dialog;
 
 namespace YouiToolkit.Views
 {

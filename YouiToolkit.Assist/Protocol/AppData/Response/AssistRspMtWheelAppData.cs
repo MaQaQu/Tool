@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.Assist.Protocol.AppData.Response
+namespace YouiToolkit.Assist
 {
     internal class AssistRspMtWheelAppData
     {

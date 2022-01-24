@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.ViewModels.Maintain
+namespace YouiToolkit.ViewModels
 {
     public class PageMtChartRenderViewModel
     {

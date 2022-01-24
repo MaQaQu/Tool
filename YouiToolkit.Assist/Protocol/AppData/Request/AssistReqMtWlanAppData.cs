@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.Assist.Protocol.AppData.Request
+namespace YouiToolkit.Assist
 {
     internal class AssistReqMtWlanAppData
     {

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using YouiToolkit.ViewModels.Maintain.Charts;
+using YouiToolkit.ViewModels;
 
 namespace YouiToolkit.Views.Maintain.Charts
 {

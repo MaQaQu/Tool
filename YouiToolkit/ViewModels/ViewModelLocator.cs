@@ -1,8 +1,6 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using YouiToolkit.ViewModels.Maintain;
-using YouiToolkit.ViewModels.Maintain.Charts;
 
 namespace YouiToolkit.ViewModels
 {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.ViewModels
+namespace YouiToolkit.Assist
 {
-    public class PageMtMapRenderViewModel
+    internal class AssistRspMtDeleteNavAppdata
     {
     }
 }
