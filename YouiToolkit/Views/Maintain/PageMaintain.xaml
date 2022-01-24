@@ -131,8 +131,8 @@
                         </Grid>
                     </Button.Content>
                 </Button>
-                
-                <Slider x:Name="SliderName" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft" TickFrequency="1" 
+                <ComboBox x:Name="cbPlaySpeed" ToolTip="倍速" Width="80"></ComboBox>
+                <Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft" TickFrequency="1" 
                         IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"
                         FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />
             </StackPanel>

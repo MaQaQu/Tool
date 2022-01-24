@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.Models.Maintain
+namespace YouiToolkit.Models
 {
     public class PageMaintainModel : ViewModelBase
     {

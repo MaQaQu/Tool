@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouiToolkit.Models.Maintain.Charts
+namespace YouiToolkit.Models
 {
     internal class PageMtChartRenderModel_Wheel
     {

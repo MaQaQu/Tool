@@ -38,6 +38,9 @@ namespace YouiToolkit.Views
         }
         private void Reload()
         {
+            List<string> lPlaySpeeds = new List<string>() { "0.5 x", "1.0 x", "1.5 x", "2.0 x" };
+            cbPlaySpeed.ItemsSource = lPlaySpeeds;
+            cbPlaySpeed.SelectedIndex = 1;
             gridMap.ShowSubPage(PageMapRender);
             gridChart.ShowSubPage(pageMtChartRender);
             PageMapRender.Reload(MapRenderReloadTarget.MapCapture);
@@ -49,10 +52,12 @@ namespace YouiToolkit.Views
             {
                 case false:
                     tbPlay.Style = (Style)FindResource("iconStop");
+                    buttonPlay.ToolTip = "停止";
                     ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = true;
                     break;
                 case true:
                     tbPlay.Style = (Style)FindResource("iconStart");
+                    buttonPlay.ToolTip = "启动";
                     ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = false;
                     break;
             }
@@ -103,7 +108,7 @@ namespace YouiToolkit.Views
 
         private void ButtonDownload_Click(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
                 PageMtNavigationDataDownload nd = new PageMtNavigationDataDownload();
                 nd.Topmost = true;
