@@ -1,5 +1,7 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.Win32;
+using SuperPort;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using YouiToolkit.Design;
 using YouiToolkit.ViewModels;
+using YouiToolkit.Views.Maintain.Dialog;
 
 namespace YouiToolkit.Views
 {
@@ -54,6 +57,60 @@ namespace YouiToolkit.Views
                     ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = false;
                     break;
             }
+        }
+
+        private void ButtonOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            //弹出文件框
+            OpenFileDialog openFileDialog = new()
+            {
+                Title = "选择数据源文件",
+                Filter = "csv文件|*.csv",
+                FileName = string.Empty,
+                FilterIndex = 1,
+                Multiselect = false,
+                RestoreDirectory = true,
+                DefaultExt = "csv",
+            };
+            if (openFileDialog.ShowDialog() ?? false)
+            {
+                //选择MariaDB文件
+                string txtFile = openFileDialog.FileName;
+                //读取文件内容
+
+            }
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new()
+            {
+                RestoreDirectory = true,
+                DefaultExt = "*.csv;",
+                Filter = "csv文件|*.csv",
+            };
+            if (saveFileDialog.ShowDialog() ?? false)
+            {
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBoxX.Error(this, $"详细错误：{ex}", "保存失败");
+                }
+            }
+        }
+
+        private void ButtonDownload_Click(object sender, RoutedEventArgs e)
+        {
+            try 
+            {
+                PageMtNavigationDataDownload nd = new PageMtNavigationDataDownload();
+                nd.Topmost = true;
+                nd.ShowDialog();
+            }
+            catch { }
         }
     }
 }

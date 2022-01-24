@@ -34,6 +34,9 @@ namespace YouiToolkit.Assist
         private int PoseGraphCounter { get; set; } = 0;
         private ConcurrentQueue<int> PoseChangedIds { get; set; } = new ConcurrentQueue<int>();
 
+        private Thread MariaDBThread { get; set; } = null;
+        public static SuperPort.CommMariaDB commMariaDB { get; private set; }
+
         public bool Disposed { get; private set; } = false;
         public bool HasIP { get; private set; } = false;
         public IPAddress IP { get; private set; } = IPAddress.None;
@@ -117,6 +120,10 @@ namespace YouiToolkit.Assist
             MapGenThread.IsBackground = true;
             MapGenRunning = true;
             MapGenThread.Start();
+
+            MariaDBThread = new Thread(MariaDBInit);
+            MariaDBThread.IsBackground = true;
+            MariaDBThread.Start();
         }
 
         private void StopThread()
@@ -221,6 +228,25 @@ namespace YouiToolkit.Assist
 
                 Thread.Sleep(MapGenInterval);
             }
+        }
+
+        private void MariaDBInit()
+        {
+            while (true)
+            {
+                StartConnectMariaDB();
+                if (SuperPort.CommMariaDB.connectSuccessFlag)
+                {
+                    Console.WriteLine("初始化完成!");
+                    break;
+                }
+                Thread.Sleep(50);
+            }
+        }
+        static void StartConnectMariaDB()
+        {
+            commMariaDB = new SuperPort.CommMariaDB();
+            commMariaDB.ConnectMariaDB();
         }
 
         private void TcpPort_DataReceived(object sender, ProtocolDataEventArgs e)
@@ -335,7 +361,7 @@ namespace YouiToolkit.Assist
                         {
                             Status.LidarPointCloud.CacheMapPriorConfig(rapp.PX, rapp.PY, rapp.PA, rapp.Resolution);
                             Status.LidarPointCloud.CacheMapPrior(rapp.PngData, (int)rapp.PngMaxLength);
-                            string str = BitConverter.ToString(rapp.PngData).Replace('-',' ');
+                            string str = BitConverter.ToString(rapp.PngData).Replace('-', ' ');
                             //Logger.Info($"[PointCloudPrior] Pack PngData: {str}/");
                         }
                         else

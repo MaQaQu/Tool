@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using YouiToolkit.Design;
 using YouiToolkit.Logging;
@@ -11,6 +12,8 @@ namespace YouiToolkit
 {
     internal class Program
     {
+
+
         [STAThread]
         internal static void Main(string[] args)
         {
@@ -61,6 +64,8 @@ namespace YouiToolkit
 
             App app = new App();
             app.Run();
+
         }
+
     }
 }
