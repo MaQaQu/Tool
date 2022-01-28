@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using YouiToolkit.Assist;
 using YouiToolkit.Ctrls;
 using YouiToolkit.Design;
@@ -29,6 +30,8 @@ namespace YouiToolkit.Views
     public partial class PageMtMapRender : UserControl
     {
         public MapRenderReloadTarget ReloadTarget { get; set; } = MapRenderReloadTarget.None;
+        internal PageMtMapRenderViewModel pageMtMapRenderViewModel = null;
+        DispatcherTimer timer = new DispatcherTimer();
 
         public void Reload(MapRenderReloadTarget reloadTarget)
         {
@@ -39,6 +42,11 @@ namespace YouiToolkit.Views
         public PageMtMapRender()
         {
             InitializeComponent();
+
+            pageMtMapRenderViewModel = new PageMtMapRenderViewModel();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 100);//设置的间隔为100ms
+            timer.Tick += timer_Tick;
+            timer.IsEnabled = true;
 
             // 地图渲染控件上下文构造完成事件
             mapRender.ContextChanged += (s, e) =>
@@ -164,5 +172,29 @@ namespace YouiToolkit.Views
         }
 
         public void ResetOrigin() => mapRender.ResetOrigin();
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (pageMtMapRenderViewModel.mapModel.ShowType)
+                {
+                    case (int)MtNavDataShowType.RealTime:
+                        tbShowType.Text = "实时";
+                        btChangeShowType.ToolTip = "点击切换为回放模式";
+                        break;
+                    case (int)MtNavDataShowType.PlayBack:
+                        tbShowType.Text = "回放";
+                        btChangeShowType.ToolTip = "点击切换为实时模式";
+                        break;
+                }
+            }
+            catch { }
+        }
+
+        private void btChangeShowType_Click(object sender, RoutedEventArgs e)
+        {
+            pageMtMapRenderViewModel.ChangeShowType();
+        }
     }
 }

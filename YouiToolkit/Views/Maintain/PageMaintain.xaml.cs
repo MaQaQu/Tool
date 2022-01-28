@@ -5,6 +5,8 @@ using SuperPort;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -27,12 +29,16 @@ namespace YouiToolkit.Views
     /// </summary>
     public partial class PageMaintain : UserControl
     {
+        Models.PageMaintainModel mo = Models.PageMaintainModel.CreateInstance();
         internal PageMtMapRender PageMapRender { get; private set; }
+        internal PageMtMapRenderForShow pageMtChartRender2 { get; set; }
         internal PageMtChartRender pageMtChartRender { get; set; }
+        internal PageMtMapRenderViewModel pageMtMapRenderViewModel = null;
         public PageMaintain()
         {
             InitializeComponent();
             PageMapRender = new PageMtMapRender();
+            pageMtChartRender2 = new PageMtMapRenderForShow();
             pageMtChartRender = new PageMtChartRender();
             Reload();
         }
@@ -44,21 +50,22 @@ namespace YouiToolkit.Views
             gridMap.ShowSubPage(PageMapRender);
             gridChart.ShowSubPage(pageMtChartRender);
             PageMapRender.Reload(MapRenderReloadTarget.MapCapture);
+            pageMtMapRenderViewModel = new PageMtMapRenderViewModel();
         }
 
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
-            switch (ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag)
+            switch (mo.videoPlayingFlag)
             {
                 case false:
                     tbPlay.Style = (Style)FindResource("iconStop");
                     buttonPlay.ToolTip = "停止";
-                    ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = true;
+                    mo.videoPlayingFlag = true;
                     break;
                 case true:
                     tbPlay.Style = (Style)FindResource("iconStart");
                     buttonPlay.ToolTip = "启动";
-                    ViewModelLocator.PageMaintain.maintainModel.videoPlayingFlag = false;
+                    mo.videoPlayingFlag = false;
                     break;
             }
         }
@@ -69,39 +76,65 @@ namespace YouiToolkit.Views
             OpenFileDialog openFileDialog = new()
             {
                 Title = "选择数据源文件",
-                Filter = "csv文件|*.csv",
+                Filter = "sql文件|*.sql",
                 FileName = string.Empty,
                 FilterIndex = 1,
                 Multiselect = false,
                 RestoreDirectory = true,
-                DefaultExt = "csv",
+                DefaultExt = "sql",
             };
             if (openFileDialog.ShowDialog() ?? false)
             {
                 //选择MariaDB文件
                 string txtFile = openFileDialog.FileName;
                 //读取文件内容
+                if (pageMtMapRenderViewModel.OpenNavDataSqlFile(txtFile))
+                {
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开成功！", ToastLocation.TopCenter));
+                }
+                else
+                {
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开失败！", ToastLocation.TopCenter));
+                }
 
             }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(mo.strNavDataCacheFilePath))
+            {
+                DispatcherHelper.BeginInvoke(() => Toast.Error(this, "请先执行读取文件操作！", ToastLocation.TopCenter));
+                gridMap.ShowSubPage(pageMtChartRender2);
+                MessageBoxX.Warning(this, "请先执行读取文件操作！", "保存失败！");
+                gridMap.ShowSubPage(PageMapRender);
+                return;
+            }
             SaveFileDialog saveFileDialog = new()
             {
                 RestoreDirectory = true,
-                DefaultExt = "*.csv;",
-                Filter = "csv文件|*.csv",
+                DefaultExt = "*.sql;",
+                Filter = "sql文件|*.sql",
             };
             if (saveFileDialog.ShowDialog() ?? false)
             {
                 try
                 {
-
+                    string toPath = saveFileDialog.FileName.ToString();
+                    if (pageMtMapRenderViewModel.SaveNavDataSqlFile(toPath))
+                    {
+                        DispatcherHelper.BeginInvoke(() => Toast.Success(this, "保存成功！", ToastLocation.TopCenter));
+                    }
+                    else
+                    {
+                        DispatcherHelper.BeginInvoke(() => Toast.Error(this, "保存失败！", ToastLocation.TopCenter));
+                    }
                 }
                 catch (Exception ex)
                 {
+                    gridMap.ShowSubPage(pageMtChartRender2);
                     MessageBoxX.Error(this, $"详细错误：{ex}", "保存失败");
+                    gridMap.ShowSubPage(PageMapRender);
                 }
             }
         }
@@ -115,6 +148,11 @@ namespace YouiToolkit.Views
                 nd.ShowDialog();
             }
             catch { }
+        }
+
+        private void ButtonSuspend_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

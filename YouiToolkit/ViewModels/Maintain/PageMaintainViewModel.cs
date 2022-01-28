@@ -18,7 +18,7 @@ namespace YouiToolkit.ViewModels
 
         public PageMaintainViewModel()
         {
-            maintainModel = new PageMaintainModel();
+            maintainModel = PageMaintainModel.CreateInstance();
         }
     }
 }

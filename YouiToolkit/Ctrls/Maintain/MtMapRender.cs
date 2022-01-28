@@ -10,6 +10,7 @@ using Color = SharpDX.Color;
 using Factory = SharpDX.Direct2D1.Factory;
 using WriteFactory = SharpDX.DirectWrite.Factory;
 using YouiToolkit.Design.DirectX;
+using YouiToolkit.Models;
 
 namespace YouiToolkit.Ctrls
 {
@@ -25,6 +26,8 @@ namespace YouiToolkit.Ctrls
         protected override Factory D2DFactory => Context.D2DFactory;
         protected override RenderTarget D2DRenderTarget => Context.D2DRenderTarget;
         #endregion
+
+        PageMtMapRenderModel mapModel = PageMtMapRenderModel.CreateInstance();
 
         public MtMapRender(FrameworkElement parent, MtMapRenderContext context)
         {
@@ -220,12 +223,26 @@ namespace YouiToolkit.Ctrls
             // 绘制实时点云
             if (Context.ShowPointCloud)
             {
-                AssistPointCloud cloud = Assist.Status.LidarPointCloud;
-                if (cloud.Count > 0)
+                //区分实时和回放
+                if (mapModel.ShowType == (int)MtNavDataShowType.PlayBack)
                 {
-                    for (int i = 0; i < cloud.Count; i++)
+                    if (mapModel.Count > 0)
                     {
-                        FillCircle((float)cloud.MapPoints[i].X, (float)cloud.MapPoints[i].Y, originScale * 3, Context.PointCloudColor);
+                        for (int i = 0; i < mapModel.Count; i++)
+                        {
+                            FillCircle((float)mapModel.MapPoints[i].X, (float)mapModel.MapPoints[i].Y, originScale * 3, Context.PointCloudColor);
+                        }
+                    }
+                }
+                else
+                {
+                    AssistPointCloud cloud = Assist.Status.LidarPointCloud;
+                    if (cloud.Count > 0)
+                    {
+                        for (int i = 0; i < cloud.Count; i++)
+                        {
+                            FillCircle((float)cloud.MapPoints[i].X, (float)cloud.MapPoints[i].Y, originScale * 3, Context.PointCloudColor);
+                        }
                     }
                 }
             }

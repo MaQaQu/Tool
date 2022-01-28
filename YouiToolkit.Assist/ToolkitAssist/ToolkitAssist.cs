@@ -347,22 +347,22 @@ namespace YouiToolkit.Assist
                         {
                             Status.LidarPointCloud.SetCount(totalCount);
                         }
-                        string str = String.Join(" ", Array.ConvertAll<float, string>(rapp.X, delegate (float s) { return s.ToString("F4"); }));
-                        string str1 = String.Join(" ", Array.ConvertAll<float, string>(rapp.Y, delegate (float s) { return s.ToString("F4"); }));
-                        //Logger.Info($"[PointCloud] Pack cloud: x:{str} y:{str1}");
+                        //string str = String.Join(" ", Array.ConvertAll<float, string>(rapp.X, delegate (float s) { return s.ToString("{0:#.###}"); }));
+                        //string str1 = String.Join(" ", Array.ConvertAll<float, string>(rapp.Y, delegate (float s) { return s.ToString("{0:#.###}"); }));
+                        //Logger.Info($"[simPointCloud] ToalCount:{totalCount} CurrCount:{currCount} x:{str} y:{str1}");
                     }
                     break;
                 case AssistCmdCode.RspPointCloudPrior:
                     {
                         var rapp = app as AssistRspPointCloudPriorAppData;
-
                         Logger.Info($"[PointCloudPrior] Pack: {rapp.CurrPack + 1}/{rapp.TotalPack} Length: {rapp.PngData.Length}");
                         if (rapp.CurrPack == 0)
                         {
                             Status.LidarPointCloud.CacheMapPriorConfig(rapp.PX, rapp.PY, rapp.PA, rapp.Resolution);
                             Status.LidarPointCloud.CacheMapPrior(rapp.PngData, (int)rapp.PngMaxLength);
-                            string str = BitConverter.ToString(rapp.PngData).Replace('-', ' ');
-                            //Logger.Info($"[PointCloudPrior] Pack PngData: {str}/");
+                            //string str = BitConverter.ToString(rapp.PngData).Replace('-', ' ');
+                            //string strnote = string.Format("[simPointCloudPrior] PX: {0} PY: {1} PA: {2} Resolution: {3} PngMaxLength: {4} PngData: {5}", rapp.PX, rapp.PY, rapp.PA, rapp.Resolution, rapp.PngMaxLength, str);
+                            //Logger.Info(strnote);
                         }
                         else
                         {

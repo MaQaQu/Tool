@@ -7,7 +7,7 @@
         xmlns:ui ="clr-namespace:YouiToolkit.Design;assembly=YouiToolkit.Design"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:oxy="http://oxyplot.org/wpf"
-        mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800" d:DataContext="{d:DesignInstance local:PageMaintain}">
+        mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800" d:DataContext="{d:DesignInstance local:PageMaintain}" >
     <UserControl.Resources>
         <Style x:Key="iconStart" TargetType="{x:Type TextBlock}">
             <Setter Property="ui:IconHelper.FontFamily"
@@ -61,7 +61,7 @@
                     </Button.Content>
                 </Button>
                 <Button x:Name="buttonDownload" Width="20" Margin="5,3,0,3" Click="ButtonDownload_Click"
-                            ToolTip="下载文件"
+                            ToolTip="读取文件"
                             Background="Transparent"
                             Style="{StaticResource PathButtonStyle}"
                             ui:ButtonHelper.HoverBrush="#90E5E5E5"
@@ -90,7 +90,7 @@
                     </Button.Content>
                 </Button>
                 <Button x:Name="buttonSuspend" Width="20"
-                            ToolTip="暂停"
+                            ToolTip="暂停" Click="ButtonSuspend_Click"
                             Background="Transparent"
                             Style="{StaticResource PathButtonStyle}"
                             ui:ButtonHelper.HoverBrush="#90E5E5E5"
@@ -142,7 +142,8 @@
                 <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="4*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="gridMap"></Grid>
+            <Grid x:Name="gridMap">             
+            </Grid>
             <Grid Grid.Column="1" x:Name="gridChart"></Grid>
         </Grid>
     </Grid>

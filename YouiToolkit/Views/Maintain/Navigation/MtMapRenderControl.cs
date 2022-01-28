@@ -8,7 +8,7 @@ using YouiToolkit.Design;
 
 namespace YouiToolkit.Views
 {
-    internal class MtMapRenderControl : D2DControl
+    internal class MtMapRenderControl : MtD2DControl
     {
         public event EventHandler ContextChanged;
 

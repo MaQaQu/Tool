@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="YouiToolkit.Views.PageMtMapRender"
+﻿<UserControl x:Class="YouiToolkit.Views.PageMtMapRenderForShow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,10 +20,10 @@
             <Grid x:Name="gridRender" Grid.Row="0">
                 <!--<local:MapRenderComponent x:Name="mapRender"/>-->
                 <!--<local:MapRenderImage x:Name="mapRender"/>-->
-                <local:MtMapRenderControl x:Name="mapRender" Visibility="Visible"/>
+                <!--<local:MtMapRenderControl x:Name="mapRender" Visibility="Visible"/>-->
             </Grid>
             <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">
-                <Button x:Name="btChangeShowType"  Width="65" Click="btChangeShowType_Click"
+                <Button x:Name="btChangeShowType"  Width="65"
                     FontFamily="{StaticResource IcoMoon}"
                     Margin="5,3,0,3" ToolTip="点击切换为回放模式"
                     Background="#FAFAFA"
