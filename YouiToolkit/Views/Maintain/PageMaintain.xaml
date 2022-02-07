@@ -132,17 +132,71 @@
                     </Button.Content>
                 </Button>
                 <ComboBox x:Name="cbPlaySpeed" ToolTip="倍速" Width="80"></ComboBox>
-                <Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft" TickFrequency="1" 
-                        IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"
+                <Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft"  
+                        IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"  Ticks="1,3,5,7" 
                         FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="4*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="gridMap">             
+            <!--<Grid x:Name="gridMap"></Grid>-->
+            <!--MQChange-->
+            <Grid x:Name="gridMap">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <local:MtMapImage Grid.Row="0" x:Name="mapRender"/>
+                <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">
+                    <Button x:Name="btChangeShowType"  Width="65" Click="btChangeShowType_Click"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="5,3,0,3" ToolTip="点击切换为回放模式"
+                    Background="#FAFAFA"
+                    ui:ButtonHelper.HoverBrush="#6EA8C1"
+                    ui:ButtonHelper.CornerRadius="5">
+                        <Button.Content>
+                            <TextBlock Foreground="Black" >
+                            <Run Text="&#xe943;" FontFamily="{StaticResource IcoMoon}" Foreground="Red"/>
+                            <ContentControl>
+                                <ContentControl.Content>
+                                    <TextBlock x:Name="tbShowType" Text="实时" FontWeight="Bold" />
+                                </ContentControl.Content>
+                            </ContentControl>
+                        </TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <!--<ComboBox x:Name="cbShowType" Margin="5,0,3,1" SelectionChanged="cbShowType_SelectionChanged"
+                          MinWidth="50"></ComboBox>-->
+                    <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                    <!--<TextBlock MinWidth="50" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="FPS"/>
+                    <Run Foreground="#3E7F2A" Text="{Binding ElementName=mapRender,Path=FpsCalc.Fps}" />
+                </TextBlock>
+                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>-->
+                    <TextBlock MinWidth="120" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xea05;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="位置"/>
+                    <Run x:Name="runMouseLoctMap" Text="0,0"/>
+                    <Run Text="(米)"/>
+                    </TextBlock>
+                    <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                    <TextBlock MinWidth="80" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xe977;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="旋转"/>
+                    <Run x:Name="runOriginRotate" Text="0"/>
+                    <Run Text="°"/>
+                    </TextBlock>
+                    <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                    <TextBlock MinWidth="100" Margin="5,0,0,0" Foreground="Black" VerticalAlignment="Center">
+                    <Run Text="&#xe97a;" FontFamily="{StaticResource IcoMoon}"/>
+                    <Run Text="缩放"/>
+                    <Run x:Name="runOriginScale" Text="100%"/>
+                    </TextBlock>
+                    <Polyline Points="0,0 0,25" Stroke="Gray" Margin="3"/>
+                </StackPanel>
             </Grid>
             <Grid Grid.Column="1" x:Name="gridChart"></Grid>
         </Grid>

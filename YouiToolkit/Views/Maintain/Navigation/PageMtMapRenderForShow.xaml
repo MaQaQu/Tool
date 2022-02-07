@@ -18,9 +18,6 @@
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid x:Name="gridRender" Grid.Row="0">
-                <!--<local:MapRenderComponent x:Name="mapRender"/>-->
-                <!--<local:MapRenderImage x:Name="mapRender"/>-->
-                <!--<local:MtMapRenderControl x:Name="mapRender" Visibility="Visible"/>-->
             </Grid>
             <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">
                 <Button x:Name="btChangeShowType"  Width="65"

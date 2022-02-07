@@ -125,8 +125,6 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
             <Grid x:Name="gridRender" Grid.Row="0">
-                <!--<local:MapRenderComponent x:Name="mapRender"/>-->
-                <!--<local:MapRenderImage x:Name="mapRender"/>-->
                 <local:MapRenderControl x:Name="mapRender" Visibility="Visible"/>
             </Grid>
             <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">

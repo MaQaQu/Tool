@@ -40,13 +40,13 @@ namespace YouiToolkit.ViewModels
                 mo.strNavDataCacheFilePath = GetDirPath() + "\\" + filename;
                 AddDownloadStep(25);
                 //从缓存表中提取数据
-                ArrayList sqlArrayList = commMariaDB.GetSqlFile(mo.strNavDataCacheFilePath);
+                List<string> sqlList = commMariaDB.GetSqlFileAndSplit(mo.strNavDataCacheFilePath);
                 AddDownloadStep(50);
                 //将缓存表数据更新到datatable
-                UpdateNavData(sqlArrayList);
+                UpdateNavData(sqlList);
                 AddDownloadStep(75);
                 //更新画布数据源
-                UpdateMapSource();
+                UpdateMapSource("first");
                 AddDownloadStep(100);
                 return true;
             }
@@ -61,9 +61,9 @@ namespace YouiToolkit.ViewModels
         {
             try
             {
-                ArrayList sqlArrayList = commMariaDB.GetSqlFile(fileName);
-                UpdateNavData(sqlArrayList);
-                UpdateMapSource();
+                List<string> sqlList = commMariaDB.GetSqlFileAndSplit(fileName);
+                UpdateNavData(sqlList);
+                UpdateMapSource("first");
                 return true;
             }
             catch { GC.Collect(); }
@@ -85,24 +85,51 @@ namespace YouiToolkit.ViewModels
             try
             {
                 AddDeleteStep(25);
-                System.Threading.Thread.Sleep(500);//测试效果用
+                System.Threading.Thread.Sleep(100);
                 AddDeleteStep(50);
                 File.Delete(GetDirPath() + "\\" + filename);
-                System.Threading.Thread.Sleep(500);//测试效果用
                 AddDeleteStep(75);
                 string[] s = filename.Split('_', '.');
                 DeleteNavData("simulatenavfilesname", Convert.ToInt32(s[1]));
                 AddDeleteStep(100);
                 return true;
             }
-            catch 
+            catch
             {
                 AddDeleteStep(100);
                 GC.Collect();
             }
             return false;
         }
+        public bool PlayNavData(DateTime currentTime)
+        {
+            try
+            {
+                //根据历史缓存序号判断当前时间是否在数据缓存中，返回当前缓存序号
+                int cacheNum = GetCacheNum(currentTime);//0-不存在 1-存在于第1缓存 2-存在于第2缓存
+                string time = currentTime.ToString("yyyyMMddhhmmss");
+                switch (cacheNum)
+                {
+                    case 0://重新加载数据缓存
+                        List<string> sqlList = commMariaDB.GetSqlFileByTime(time);//yyyyMMddhhmmss格式字符串
+                        UpdateNavData(sqlList);
+                        break;
+                    case 1://使用第1缓存数据，判断是否触发重新加载第2缓存线程
 
+                        break;
+                    case 2://使用第2缓存数据，判断是否触发重新加载第1缓存线程
+
+                        break;
+                }
+                UpdateMapSource(time);
+            }
+            catch { }
+            return false;
+        }
+        public bool IsInDate(DateTime dt, DateTime dt1, DateTime dt2)
+        {
+            return commMariaDB.IsInDate(dt, dt1, dt2);
+        }
         //MAP
         public void ChangeShowType()
         {
@@ -142,39 +169,64 @@ namespace YouiToolkit.ViewModels
             mo.dtNavFilesName = mo.dtNavFilesName.DefaultView.ToTable();//返回一个新的DataTable
             GC.Collect();
         }
-        private void UpdateNavData(ArrayList arrayList)
+        private void UpdateNavData(List<string> arrayList)
         {
             //处理sql文件数据
             mo.dtPointCloudData.Clear();
             DataRow dr;
-            foreach (var arr in arrayList)
+            if (arrayList != null && arrayList.Count > 0)
             {
-                string split = ", ";
-                string[] data = Regex.Split(arr.ToString(), split, RegexOptions.IgnoreCase);
-                if (data.Count() >= 5)
+                foreach (var arr in arrayList)
                 {
-                    dr = mo.dtPointCloudData.NewRow();
-                    dr["id"] = data[0];
-                    dr["VehicleID"] = data[1];
-                    dr["TotalCount"] = data[2];
-                    dr["CurrentCount"] = data[3];
-                    dr["XArray"] = data[4].Replace("'", "");
-                    dr["YArray"] = data[5].Replace("'", "");
-                    dr["CurrentTime"] = data[6].Replace("'", "");
-                    mo.dtPointCloudData.Rows.Add(dr);
+                    string split = ", ";
+                    string[] data = Regex.Split(arr.ToString(), split, RegexOptions.IgnoreCase);
+                    if (data.Count() >= 5)
+                    {
+                        dr = mo.dtPointCloudData.NewRow();
+                        dr["id"] = data[0];
+                        dr["VehicleID"] = data[1];
+                        dr["TotalCount"] = data[2];
+                        dr["CurrentCount"] = data[3];
+                        dr["XArray"] = data[4].Replace("'", "");
+                        dr["YArray"] = data[5].Replace("'", "");
+                        dr["CurrentTime"] = data[6].Replace("'", "");
+                        mo.dtPointCloudData.Rows.Add(dr);
+                    }
                 }
+                arrayList.Clear();
             }
-            arrayList.Clear();
             mo.dtPointCloudData.DefaultView.Sort = "CurrentTime Asc"; //按CreateTime升排序
             mo.dtPointCloudData = mo.dtPointCloudData.DefaultView.ToTable();//返回一个新的DataTable
+            mapModel.StartTime = commMariaDB.GetStartEndTime(1);
+            mapModel.EndTime = commMariaDB.GetStartEndTime(2);
+            mapModel.PlayTime = mapModel.StartTime;
             GC.Collect();
         }
-        private void UpdateMapSource()
+        private void UpdateMapSource(string currentTime)
         {
-            int count = (int)mo.dtPointCloudData.Rows[0]["CurrentCount"];
-            int totalCount = (int)mo.dtPointCloudData.Rows[0]["TotalCount"];
-            float[] Xarray = mo.dtPointCloudData.Rows[0]["XArray"].ToString().Split(' ').Select(x => Convert.ToSingle(x)).ToArray();
-            float[] Yarray = mo.dtPointCloudData.Rows[0]["YArray"].ToString().Split(' ').Select(x => Convert.ToSingle(x)).ToArray();
+            int index = -1;
+            if (currentTime == "first")
+            {
+                index = 0;
+            }
+            else
+            {
+                //根据当前时间匹配数据
+                //遍历list数据，匹配每两条数据的时间是否包含当前时间，是则返回索引，直到返回最后一条数据
+                DateTime current = Convert.ToDateTime(commMariaDB.StringToDate(currentTime));
+                for (int i = 0; i < mo.dtPointCloudData.Rows.Count; i++)
+                {
+                    DateTime dt = Convert.ToDateTime(mo.dtPointCloudData.Rows[i]["CurrentTime"]);
+                    if (i != mo.dtPointCloudData.Rows.Count - 1 && current < dt)
+                        break;
+                    else
+                        index = i;
+                }
+            }
+            int count = (int)mo.dtPointCloudData.Rows[index]["CurrentCount"];
+            int totalCount = (int)mo.dtPointCloudData.Rows[index]["TotalCount"];
+            float[] Xarray = mo.dtPointCloudData.Rows[index]["XArray"].ToString().Split(' ').Select(x => Convert.ToSingle(x)).ToArray();
+            float[] Yarray = mo.dtPointCloudData.Rows[index]["YArray"].ToString().Split(' ').Select(x => Convert.ToSingle(x)).ToArray();
             mapModel.MapPoints = new GraphPoint[count];
             for (int i = 0; i < count; i++)
             {
@@ -189,6 +241,25 @@ namespace YouiToolkit.ViewModels
             }
             ChangeShowTypeToPlayBack();
             GC.Collect();
+        }
+        private int GetCacheNum(DateTime currentTime)
+        {
+            int num = 0;
+            try
+            {
+                //根据历史缓存编号，优先判断对应缓存表
+                //检测当前时间是否在对应缓存表时间段内
+                //如不存在则继续检测另一缓存表
+                //如都不存在返回0
+                DateTime start = Convert.ToDateTime(mo.dtPointCloudData.Rows[0]["CurrentTime"]);
+                DateTime end = Convert.ToDateTime(mo.dtPointCloudData.Rows[mo.dtPointCloudData.Rows.Count - 1]["CurrentTime"]);
+                if (IsInDate(currentTime, start, end))
+                {
+                    num = 1;
+                }
+            }
+            catch { }
+            return num;
         }
         private void AddDownloadStep(int n)
         {

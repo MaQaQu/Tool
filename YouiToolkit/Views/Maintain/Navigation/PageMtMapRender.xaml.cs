@@ -43,7 +43,8 @@ namespace YouiToolkit.Views
         {
             InitializeComponent();
 
-            pageMtMapRenderViewModel = new PageMtMapRenderViewModel();
+            pageMtMapRenderViewModel = new PageMtMapRenderViewModel(); 
+            timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 100);//设置的间隔为100ms
             timer.Tick += timer_Tick;
             timer.IsEnabled = true;

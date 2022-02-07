@@ -1,4 +1,4 @@
-using SharpDX.Direct2D1;
+﻿using SharpDX.Direct2D1;
 using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
@@ -16,7 +16,7 @@ using Image = System.Windows.Controls.Image;
 
 namespace YouiToolkit.Design
 {
-    public abstract class D2DBitmap : Image
+    public abstract class D2DBitmap_Mt : Image
     {
         protected Device device;
         protected Texture2D renderTarget;
@@ -44,7 +44,7 @@ namespace YouiToolkit.Design
             }
         }
 
-        public D2DBitmap()
+        public D2DBitmap_Mt()
         {
             Loaded += Window_Loaded;
             Unloaded += Window_Closing;
@@ -156,7 +156,7 @@ namespace YouiToolkit.Design
             Disposer.SafeDispose(ref renderTarget);
             Disposer.SafeDispose(ref device);
 
-            InternalUninitialize(); 
+            InternalUninitialize();
         }
 
         public void CreateAndBindTargets()

@@ -27,6 +27,9 @@ namespace YouiToolkit.Models
         public GraphPoint[] MapPoints { get; set; }
         public GraphPoint[] MapPointsPrior { get; set; } = null;
         public int Count { get; set; } = 0;
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public DateTime PlayTime { get; set; }
         public int ShowType { get; set; }
     }
     public enum MtNavDataDownloadConfirmType

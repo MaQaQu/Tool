@@ -423,7 +423,7 @@ namespace YouiToolkit.Design.DirectX
                 origin[0, 0] = -1;
             }
 
-            if (OriginFlipY)
+            if (OriginFlipY)//原点翻转
             {
                 origin[1, 1] = -1;
             }
