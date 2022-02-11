@@ -111,7 +111,8 @@ namespace YouiToolkit.Views
             this.Dispatcher.BeginInvoke((ThreadStart)delegate
             {
                 //this.DialogResult = true;
-                pageMtMapRenderViewModel.mo.overOperationFlag = true;
+                pageMtMapRenderViewModel.mo.overDownloadFlag = true;
+                pageMtMapRenderViewModel.mo.updateTimeBarFlag = true;
                 this.Close();
                 mo.downloadingFlag = false;
             });
@@ -130,7 +131,7 @@ namespace YouiToolkit.Views
             this.Dispatcher.BeginInvoke((ThreadStart)delegate
             {
                 //this.DialogResult = true;
-                pageMtMapRenderViewModel.mo.overOperationFlag = true;
+                pageMtMapRenderViewModel.mo.overDeleteFlag = true;
                 this.Close();
             });
         }

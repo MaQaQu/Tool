@@ -31,6 +31,17 @@ namespace YouiToolkit.ViewModels
             catch { }
         }
 
+        public void GetAlarmData()
+        {
+            try
+            {
+                string path = GetDirPath() + "\\simulateagvalarmdata_1.sql";
+                ArrayList sqlArrayList = commMariaDB.GetSqlFile(path);
+                UpdateAlarmData(sqlArrayList);
+            }
+            catch { }
+        }
+
         //保存导航文件数据
         public bool DownloadNavData(string filename)
         {
@@ -38,15 +49,17 @@ namespace YouiToolkit.ViewModels
             {
                 //接收导航数据，存放在缓存文件夹中(只保留1个)
                 mo.strNavDataCacheFilePath = GetDirPath() + "\\" + filename;
-                AddDownloadStep(25);
+                AddDownloadStep(20);
                 //从缓存表中提取数据
                 List<string> sqlList = commMariaDB.GetSqlFileAndSplit(mo.strNavDataCacheFilePath);
-                AddDownloadStep(50);
+                AddDownloadStep(40);
                 //将缓存表数据更新到datatable
                 UpdateNavData(sqlList);
-                AddDownloadStep(75);
+                AddDownloadStep(60);
                 //更新画布数据源
                 UpdateMapSource("first");
+                AddDownloadStep(80);
+                SetNavDataTime();
                 AddDownloadStep(100);
                 return true;
             }
@@ -61,9 +74,11 @@ namespace YouiToolkit.ViewModels
         {
             try
             {
+                mo.strNavDataCacheFilePath = fileName;
                 List<string> sqlList = commMariaDB.GetSqlFileAndSplit(fileName);
                 UpdateNavData(sqlList);
                 UpdateMapSource("first");
+                SetNavDataTime();
                 return true;
             }
             catch { GC.Collect(); }
@@ -107,11 +122,11 @@ namespace YouiToolkit.ViewModels
             {
                 //根据历史缓存序号判断当前时间是否在数据缓存中，返回当前缓存序号
                 int cacheNum = GetCacheNum(currentTime);//0-不存在 1-存在于第1缓存 2-存在于第2缓存
-                string time = currentTime.ToString("yyyyMMddhhmmss");
+                string time = currentTime.ToString("yyyyMMddHHmmss");
                 switch (cacheNum)
                 {
                     case 0://重新加载数据缓存
-                        List<string> sqlList = commMariaDB.GetSqlFileByTime(time);//yyyyMMddhhmmss格式字符串
+                        List<string> sqlList = commMariaDB.GetSqlFileByTime(time);//yyyyMMddHHmmss格式字符串
                         UpdateNavData(sqlList);
                         break;
                     case 1://使用第1缓存数据，判断是否触发重新加载第2缓存线程
@@ -130,6 +145,10 @@ namespace YouiToolkit.ViewModels
         {
             return commMariaDB.IsInDate(dt, dt1, dt2);
         }
+        public DateTime SetInDate(DateTime dt, DateTime dtmin, DateTime dtmax)
+        {
+            return commMariaDB.SetInDate(dt, dtmin, dtmax);
+        }
         //MAP
         public void ChangeShowType()
         {
@@ -140,6 +159,18 @@ namespace YouiToolkit.ViewModels
                     break;
                 case (int)MtNavDataShowType.PlayBack:
                     ChangeShowTypeToRealTime();
+                    break;
+            }
+        }
+        public void ChangeShowTypeTo(MtNavDataShowType type)
+        {
+            switch (type)
+            {
+                case MtNavDataShowType.RealTime:
+                    ChangeShowTypeToRealTime();
+                    break;
+                case MtNavDataShowType.PlayBack:
+                    ChangeShowTypeToPlayBack();
                     break;
             }
         }
@@ -167,6 +198,30 @@ namespace YouiToolkit.ViewModels
             arrayList.Clear();
             mo.dtNavFilesName.DefaultView.Sort = "Date Desc,StartTime Desc"; //按CreateTime升排序
             mo.dtNavFilesName = mo.dtNavFilesName.DefaultView.ToTable();//返回一个新的DataTable
+            GC.Collect();
+        }
+        private void UpdateAlarmData(ArrayList arrayList)
+        {
+            mo.dtAlarmData.Clear();
+            DataRow dr;
+            foreach (var arr in arrayList)
+            {
+                string split = ", ";
+                string[] data = Regex.Split(arr.ToString(), split, RegexOptions.IgnoreCase);
+                if (data.Count() >= 5)
+                {
+                    dr = mo.dtAlarmData.NewRow();
+                    dr["ID"] = data[0];
+                    dr["VechicleID"] = data[1];
+                    dr["AlarmCode"] = data[2];
+                    dr["StartTime"] = data[3].Replace("'", "");
+                    dr["EndTime"] = data[4].Replace("'", "");
+                    mo.dtAlarmData.Rows.Add(dr);
+                }
+            }
+            arrayList.Clear();
+            mo.dtAlarmData.DefaultView.Sort = "StartTime Desc"; //按CreateTime升排序
+            mo.dtAlarmData = mo.dtAlarmData.DefaultView.ToTable();//返回一个新的DataTable
             GC.Collect();
         }
         private void UpdateNavData(List<string> arrayList)
@@ -197,9 +252,6 @@ namespace YouiToolkit.ViewModels
             }
             mo.dtPointCloudData.DefaultView.Sort = "CurrentTime Asc"; //按CreateTime升排序
             mo.dtPointCloudData = mo.dtPointCloudData.DefaultView.ToTable();//返回一个新的DataTable
-            mapModel.StartTime = commMariaDB.GetStartEndTime(1);
-            mapModel.EndTime = commMariaDB.GetStartEndTime(2);
-            mapModel.PlayTime = mapModel.StartTime;
             GC.Collect();
         }
         private void UpdateMapSource(string currentTime)
@@ -239,7 +291,6 @@ namespace YouiToolkit.ViewModels
                     mapModel.Count = totalCount;
                 }
             }
-            ChangeShowTypeToPlayBack();
             GC.Collect();
         }
         private int GetCacheNum(DateTime currentTime)
@@ -291,6 +342,12 @@ namespace YouiToolkit.ViewModels
         private void ChangeShowTypeToPlayBack()
         {
             mapModel.ShowType = (int)MtNavDataShowType.PlayBack;
+        }
+        private void SetNavDataTime()
+        {
+            mapModel.StartTime = commMariaDB.GetStartEndTime(1);
+            mapModel.EndTime = commMariaDB.GetStartEndTime(2);
+            mapModel.PlayTime = mapModel.StartTime;
         }
 
         #region MariaDB

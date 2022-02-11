@@ -40,6 +40,16 @@ namespace YouiToolkit.Views
         internal PageMtMapRenderViewModel pageMtMapRenderViewModel = null;
         DispatcherTimer timer;
         DispatcherTimer timer_Render;
+        int playSpeed = 5;
+        int playTick = 0;
+        int playAddTime = 1000;
+        int playAddTick = 0;
+        int palyAddMultiple = 0;
+        bool changePlayTime = false;
+        bool startGoBack = false;
+        bool startGofoward = false;
+        bool isPlayWhenPressSlider = false;
+        DateTime dtChangePlayTime = DateTime.MinValue;
         public PageMaintain()
         {
             InitializeComponent();
@@ -86,27 +96,53 @@ namespace YouiToolkit.Views
             if (timer_Render == null)
             {
                 timer_Render = new DispatcherTimer();
-                timer_Render.Interval = new TimeSpan(0, 0, 0, 1, 0);//设置的间隔为1s
+                timer_Render.Interval = new TimeSpan(0, 0, 0, 0, 200);//设置的间隔为200ms
                 timer_Render.Tick += timer_Render_Tick;
                 timer_Render.IsEnabled = true;
             }
+            sliderTime.AddHandler(Slider.MouseLeftButtonUpEvent, new MouseButtonEventHandler(sliderTime_MouseLeftButtonUp), true);
+            sliderTime.AddHandler(Slider.MouseLeftButtonDownEvent, new MouseButtonEventHandler(sliderTime_MouseLeftButtonDown), true);
+            buttonGoback.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(buttonGoback_MouseLeftButtonDown), true);
+            buttonGoback.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(buttonGoback_MouseLeftButtonUp), true);
+            buttonGofoward.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(buttonGofoward_MouseLeftButtonDown), true);
+            buttonGofoward.AddHandler(Button.MouseLeftButtonUpEvent, new MouseButtonEventHandler(buttonGofoward_MouseLeftButtonUp), true);
         }
-
-        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            switch (mo.videoPlayingFlag)
+            try
             {
-                case false:
-                    tbPlay.Style = (Style)FindResource("iconStop");
-                    buttonPlay.ToolTip = "停止";
-                    mo.videoPlayingFlag = true;
-                    break;
-                case true:
-                    tbPlay.Style = (Style)FindResource("iconStart");
-                    buttonPlay.ToolTip = "启动";
-                    mo.videoPlayingFlag = false;
-                    break;
+                switch (pageMtMapRenderViewModel.mapModel.ShowType)
+                {
+                    case (int)MtNavDataShowType.RealTime:
+                        tbShowType.Text = "实时";
+                        btChangeShowType.ToolTip = "点击切换为回放模式";
+                        spPlayControls.Visibility = Visibility.Hidden;
+                        break;
+                    case (int)MtNavDataShowType.PlayBack:
+                        tbShowType.Text = "回放";
+                        btChangeShowType.ToolTip = "点击切换为实时模式";
+                        spPlayControls.Visibility = Visibility.Visible;
+                        break;
+                }
             }
+            catch { }
+        }
+        private void timer_Render_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (mo.videoPlayingFlag)
+                {
+                    DoChangeSliderPlayTime();
+                    DoGobackOrfowardPlayTime();
+                    DoChangePlayData();
+                }
+                if (mo.updateTimeBarFlag)
+                {
+                    DoUpdateTimeBar();
+                }
+            }
+            catch { }
         }
 
         private void ButtonOpenFile_Click(object sender, RoutedEventArgs e)
@@ -129,7 +165,9 @@ namespace YouiToolkit.Views
                 //读取文件内容
                 if (pageMtMapRenderViewModel.OpenNavDataSqlFile(txtFile))
                 {
+                    mo.updateTimeBarFlag = true;
                     DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开成功！", ToastLocation.TopCenter));
+                    stopPlay();
                 }
                 else
                 {
@@ -138,7 +176,6 @@ namespace YouiToolkit.Views
 
             }
         }
-
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(mo.strNavDataCacheFilePath))
@@ -177,7 +214,6 @@ namespace YouiToolkit.Views
                 }
             }
         }
-
         private void ButtonDownload_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -188,51 +224,165 @@ namespace YouiToolkit.Views
             }
             catch { }
         }
-
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
+        {
+            switch (mo.videoPlayingFlag)
+            {
+                case false:
+                    tbPlay.Style = (Style)FindResource("iconStop");
+                    buttonPlay.ToolTip = "停止";
+                    mo.videoPlayingFlag = true;
+                    break;
+                case true:
+                    tbPlay.Style = (Style)FindResource("iconStart");
+                    buttonPlay.ToolTip = "启动";
+                    mo.videoPlayingFlag = false;
+                    break;
+            }
+        }
         private void ButtonSuspend_Click(object sender, RoutedEventArgs e)
         {
-            //gridMap.ShowSubPage(PageMapRender);//MQChange
-            //PageMapRender.Reload(MapRenderReloadTarget.MapCapture);
+            stopPlay();
         }
-
-
-        private void timer_Tick(object sender, EventArgs e)
+        private void buttonGoback_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                switch (pageMtMapRenderViewModel.mapModel.ShowType)
-                {
-                    case (int)MtNavDataShowType.RealTime:
-                        tbShowType.Text = "实时";
-                        btChangeShowType.ToolTip = "点击切换为回放模式";
-                        break;
-                    case (int)MtNavDataShowType.PlayBack:
-                        tbShowType.Text = "回放";
-                        btChangeShowType.ToolTip = "点击切换为实时模式";
-                        break;
-                }
-            }
-            catch { }
+            startGoBack = true;
         }
-
-        private void timer_Render_Tick(object sender, EventArgs e)
+        private void buttonGoback_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
+            startGoBack = false;
+        }
+        private void buttonGofoward_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startGofoward = true;
+        }
+        private void buttonGofoward_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            startGofoward = false;
+        }
+        private void cbPlaySpeed_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbPlaySpeed.SelectedIndex)
             {
-                if (mo.videoPlayingFlag)
-                {
-                    if (pageMtMapRenderViewModel.IsInDate(mapModel.PlayTime, mapModel.StartTime, mapModel.EndTime))
-                    {
-                        mapModel.PlayTime = mapModel.PlayTime.AddSeconds(1);
-                        pageMtMapRenderViewModel.PlayNavData(mapModel.PlayTime);
-                    }
-                }
+                case 0: playSpeed = 10; break;
+                case 1: playSpeed = 5; break;
+                case 2: playSpeed = 2; break;
+                case 3: playSpeed = 1; break;
+                default: playSpeed = 5; break;
             }
-            catch { }
+        }
+        private void sliderTime_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            dtChangePlayTime = new DateTime((long)sliderTime.Value);
+            changePlayTime = true;
+            mo.videoPlayingFlag = isPlayWhenPressSlider;
+        }
+        private void sliderTime_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isPlayWhenPressSlider = mo.videoPlayingFlag;
+            mo.videoPlayingFlag = false;
         }
         private void btChangeShowType_Click(object sender, RoutedEventArgs e)
         {
+            stopPlay();
             pageMtMapRenderViewModel.ChangeShowType();
+        }
+
+        private void DoChangeSliderPlayTime()
+        {
+            if (changePlayTime)
+            {
+                changePlayTime = false;
+                mapModel.PlayTime = dtChangePlayTime;
+                textTime.Text = mapModel.PlayTime.ToString("yy/MM/dd HH:mm:ss");
+                sliderTime.Value = mapModel.PlayTime.Ticks;
+            }
+        }
+        private void DoGobackOrfowardPlayTime()
+        {
+            if (startGoBack || startGofoward)
+            {
+                //计次 增量递增
+                if (playAddTick % 2 == 0)
+                {
+                    playAddTick = 1;
+                    palyAddMultiple = palyAddMultiple >= 600 ? 600 : palyAddMultiple + 3;
+                }
+                else
+                {
+                    playAddTick++;
+                }
+                int addTime;
+                switch (cbPlaySpeed.SelectedIndex)
+                {
+                    case 0: addTime = 500 * palyAddMultiple; break;
+                    case 1: addTime = 1000 * palyAddMultiple; break;
+                    case 2: addTime = 1500 * palyAddMultiple; break;
+                    case 3: addTime = 2000 * palyAddMultiple; break;
+                    default: addTime = 1000; break;
+                }
+                playAddTime = startGoBack ? -addTime : addTime;
+            }
+            else
+            { playAddTime = 1000; playAddTick = 0; palyAddMultiple = 0; }
+        }
+        private void DoChangePlayData()
+        {
+            if (playTick % playSpeed == 0)
+            {
+                playTick = 1;
+                if (pageMtMapRenderViewModel.IsInDate(mapModel.PlayTime, mapModel.StartTime, mapModel.EndTime))
+                {
+                    DateTime dtTemp = pageMtMapRenderViewModel.SetInDate(mapModel.PlayTime.AddMilliseconds(playAddTime), mapModel.StartTime, mapModel.EndTime);
+                    if (mapModel.PlayTime != dtTemp)
+                    {
+                        mapModel.PlayTime = dtTemp;
+                        pageMtMapRenderViewModel.PlayNavData(mapModel.PlayTime);
+                    }
+                }
+                textTime.Text = mapModel.PlayTime.ToString("yy/MM/dd HH:mm:ss");
+                sliderTime.Value = mapModel.PlayTime.Ticks;
+            }
+            else
+            {
+                playTick++;
+            }
+        }
+        private void DoUpdateTimeBar()
+        {
+            pageMtMapRenderViewModel.ChangeShowTypeTo(MtNavDataShowType.PlayBack);
+            pageMtMapRenderViewModel.GetAlarmData();
+            spPlayControls.Visibility = Visibility.Visible;
+            sliderTime.Minimum = mapModel.StartTime.Ticks;
+            sliderTime.Maximum = mapModel.EndTime.Ticks;
+            sliderTime.Ticks = GetAlarmTicks();
+            mo.updateTimeBarFlag = false;
+        }
+        private DoubleCollection GetAlarmTicks()
+        {
+            DoubleCollection dc = new DoubleCollection();
+            try
+            {
+                for (int i = 0; i < mo.dtAlarmData.Rows.Count; i++)
+                {
+                    double d = Convert.ToDateTime(mo.dtAlarmData.Rows[i]["StartTime"]).Ticks;
+                    dc.Add(d);
+                }
+            }
+            catch { }
+            return dc;
+        }
+        private void stopPlay()
+        {
+            tbPlay.Style = (Style)FindResource("iconStart");
+            buttonPlay.ToolTip = "启动";
+            mo.videoPlayingFlag = false;
+            startGoBack = false;
+            startGofoward = false;
+            mapModel.PlayTime = mapModel.StartTime;
+            pageMtMapRenderViewModel.PlayNavData(mapModel.PlayTime);
+            textTime.Text = mapModel.PlayTime.ToString("yy/MM/dd HH:mm:ss");
+            sliderTime.Value = mapModel.PlayTime.Ticks;
         }
     }
 }

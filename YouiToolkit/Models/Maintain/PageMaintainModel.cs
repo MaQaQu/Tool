@@ -22,10 +22,13 @@ namespace YouiToolkit.Models
             downloadingFlag = false;
             navDataDeleteStep = 0;
             deletingFlag = false;
-            overOperationFlag = false;
+            overDownloadFlag = false;
+            overDeleteFlag = false;
+            updateTimeBarFlag = false;
             InitDtNavFilesName();
             InitDtNavData();
             InitDtPointCloudData();
+            InitDtAlarmData();
         }
         public static PageMaintainModel CreateInstance()
         {
@@ -66,16 +69,28 @@ namespace YouiToolkit.Models
             dc = dtPointCloudData.Columns.Add("YArray", Type.GetType("System.String"));
             dc = dtPointCloudData.Columns.Add("CurrentTime", Type.GetType("System.DateTime"));
         }
+        private void InitDtAlarmData()
+        {
+            dtAlarmData = new DataTable("simulatednavdata");
+            dtAlarmData.Columns.Add("ID", Type.GetType("System.Int32"));
+            dtAlarmData.Columns.Add("VechicleID", Type.GetType("System.Int32"));
+            dtAlarmData.Columns.Add("AlarmCode", Type.GetType("System.Int32"));
+            dtAlarmData.Columns.Add("StartTime", Type.GetType("System.DateTime"));
+            dtAlarmData.Columns.Add("EndTime", Type.GetType("System.DateTime"));
+        }
 
         public bool videoPlayingFlag { get; set; }
         public int navDataDownloadStep { get; set; }
         public bool downloadingFlag { get; set; }
         public int navDataDeleteStep { get; set; }
         public bool deletingFlag { get; set; }
-        public bool overOperationFlag { get; set; }
+        public bool overDownloadFlag { get; set; }
+        public bool overDeleteFlag { get; set; }
+        public bool updateTimeBarFlag { get; set; }
         public DataTable dtNavData { get; set; }
         public DataTable dtPointCloudData { get; set; }
         public DataTable dtNavFilesName { get; set; }
+        public DataTable dtAlarmData { get; set; }
         public string strNavDataCacheFilePath { get; set; }
     }
 }

@@ -98,7 +98,7 @@ namespace YouiToolkit.Views
                         if (radioInPanelCount < 4)
                         {
                             RadioButton rb = new RadioButton();
-                            rb.Name = string.Format("{0}_{1}", name, id);
+                            rb.Name = string.Format("{0}", name);
                             rb.Content = string.Format("{0}-{1}", starttime, endtime);
                             rb.Margin = new Thickness(15, 5, 0, 5);
                             rb.GroupName = "navFiles";
@@ -142,12 +142,12 @@ namespace YouiToolkit.Views
                 MessageBoxX.Warning(this, "请先选择要下载的文件！", "下载失败");
                 return;
             }
-            pageMtMapRenderViewModel.mo.overOperationFlag = false;
+            pageMtMapRenderViewModel.mo.overDownloadFlag = false;
             PageMtNavDataDownloadConfirm c = new PageMtNavDataDownloadConfirm("请确认是否下载选中文件？", (int)Models.MtNavDataDownloadConfirmType.downloadConfirm, selectedFileName);
             c.ShowInTaskbar = false;
             c.Topmost = true;
             c.ShowDialog();
-            if (pageMtMapRenderViewModel.mo.overOperationFlag)
+            if (pageMtMapRenderViewModel.mo.overDownloadFlag)
                 this.Close();
         }
 
@@ -158,12 +158,12 @@ namespace YouiToolkit.Views
                 MessageBoxX.Warning(this, "请先选择要删除的文件！", "删除失败");
                 return;
             }
-            pageMtMapRenderViewModel.mo.overOperationFlag = false;
+            pageMtMapRenderViewModel.mo.overDeleteFlag = false;
             PageMtNavDataDownloadConfirm c = new PageMtNavDataDownloadConfirm("请确认是否删除选中文件？", (int)Models.MtNavDataDownloadConfirmType.deleteConfirm, selectedFileName);
             c.ShowInTaskbar = false;
             c.Topmost = true;
             c.ShowDialog();
-            if (pageMtMapRenderViewModel.mo.overOperationFlag)
+            if (pageMtMapRenderViewModel.mo.overDeleteFlag)
             {
                 stackPanelNavFiles.Children.Clear();
                 UpdateNavFilsList();

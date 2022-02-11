@@ -222,10 +222,12 @@ namespace SuperPort
                     {
                         string fileName = Path.GetFileNameWithoutExtension(item);
                         string[] name = fileName.Split('_');
-                        DateTime start = Convert.ToDateTime(StringToDate(name[2]));
-                        DateTime end = Convert.ToDateTime(StringToDate(name[3]));
+                        int indexStart = name.Length >= 2 ? name.Length - 2 : 0;
+                        int indexEnd = name.Length >= 1 ? name.Length - 1 : 0;
+                        DateTime start = Convert.ToDateTime(StringToDate(name[indexStart]));
+                        DateTime end = Convert.ToDateTime(StringToDate(name[indexEnd]));
                         //判断输入日期是否在起止日期之间
-                        DateTime current = Convert.ToDateTime(StringToDate(currentTime));//yyyyMMddhhmmss格式字符串
+                        DateTime current = Convert.ToDateTime(StringToDate(currentTime));//yyyyMMddHHmmss格式字符串
                         if (IsInDate(current, start, end))
                         {
                             using (var rs = new StreamReader(item, System.Text.Encoding.Default))
@@ -261,8 +263,10 @@ namespace SuperPort
                     {
                         string fileName = Path.GetFileNameWithoutExtension(item);
                         string[] name = fileName.Split('_');
-                        DateTime start = Convert.ToDateTime(StringToDate(name[2]));
-                        DateTime end = Convert.ToDateTime(StringToDate(name[3]));
+                        int indexStart = name.Length >= 2 ? name.Length - 2 : 0;
+                        int indexEnd = name.Length >= 1 ? name.Length - 1 : 0;
+                        DateTime start = Convert.ToDateTime(StringToDate(name[indexStart]));
+                        DateTime end = Convert.ToDateTime(StringToDate(name[indexEnd]));
                         if (start < dtStart) dtStart = start;
                         if (end > dtEnd) dtEnd = end;
                     }
@@ -285,14 +289,34 @@ namespace SuperPort
             string Time = string.Format("{0}-{1}-{2} {3}:{4}:{5}", time.Substring(0, 4), time.Substring(4, 2), time.Substring(6, 2), time.Substring(8, 2), time.Substring(10, 2), time.Substring(12, 2));
             return Time;
         }
-        public bool IsInDate(DateTime dt, DateTime dt1, DateTime dt2)
+        public bool IsInDate(DateTime dt, DateTime dtmin, DateTime dtmax)
         {
             try
             {
-                return dt.CompareTo(dt1) >= 0 && dt.CompareTo(dt2) <= 0;
+                return dt.CompareTo(dtmin) >= 0 && dt.CompareTo(dtmax) <= 0;
             }
             catch { }
             return false;
+        }
+        public DateTime SetInDate(DateTime dt, DateTime dtmin, DateTime dtmax)
+        {
+            try
+            {
+                if (dt.CompareTo(dtmin) < 0)
+                {
+                    return dtmin;
+                }
+                else if (dt.CompareTo(dtmax) > 0)
+                {
+                    return dtmax;
+                }
+                else
+                {
+                    return dt;
+                }
+            }
+            catch { }
+            return dt;
         }
 
         private void ClearCachefile()

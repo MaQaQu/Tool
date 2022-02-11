@@ -21,6 +21,85 @@
             <Setter Property="Text" Value="&#xe9c9;"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style x:Key="StyleForRepeatButton" TargetType="{x:Type RepeatButton}">
+            <Style.Setters>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush
+                            StartPoint="0.5,0"
+                            EndPoint="0.5,1">
+                            <GradientStop Color="#313A4C" Offset="0"/>
+                            <GradientStop Color="#979B9F" Offset="1"/>
+                            <!--<GradientStop Color="LightGreen" Offset="0"/>
+                            <GradientStop Color="Yellow" Offset="1"/>-->
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Height" Value="10"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Focusable" Value="False"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0.5,0"
+                                                 EndPoint="0.5,1">
+                                <GradientStop Color="LightBlue" Offset="0"/>
+                                <GradientStop Color="SkyBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="tmpThumb" TargetType="{x:Type Thumb}">
+            <Ellipse Name="e" Width="8" MinHeight="10" Fill="Gray"/>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="e" Property="Fill" Value="#EC6D51"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="tmp" TargetType="{x:Type Slider}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" MinHeight="20"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TickBar x:Name="top" Fill="Red" Grid.Row="0" HorizontalAlignment="Stretch"
+                         Placement="Top" Height="8"
+                         Visibility="Collapsed"/>
+                <Track x:Name="PART_Track" Grid.Row="1" HorizontalAlignment="Stretch">
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource StyleForRepeatButton}"
+                                      Command="Slider.IncreaseLarge"/>
+                    </Track.IncreaseRepeatButton>
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource StyleForRepeatButton}"
+                                      Command="Slider.DecreaseLarge"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Height="20" Template="{StaticResource tmpThumb}"/>
+                    </Track.Thumb>
+                </Track>
+                <TickBar x:Name="Bottom" Grid.Row="2" Fill="Magenta" HorizontalAlignment="Stretch"
+                         Visibility="Collapsed" Placement="Bottom" Height="8"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="TickPlacement" Value="TopLeft">
+                    <Setter TargetName="top" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="TickPlacement" Value="BottomRight">
+                    <Setter Property="Visibility" TargetName="Bottom" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="TickPlacement" Value="Both">
+                    <Setter TargetName="top" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="Bottom" Property="Visibility" Value="Visible"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -76,8 +155,9 @@
                         </Grid>
                     </Button.Content>
                 </Button>
-                <Polyline Points="0,0 0,25" Stroke="Gray" Margin="8,7,8,7"/>
-                <Button x:Name="buttonPlay" Width="20"
+                <StackPanel x:Name="spPlayControls" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden">
+                    <Polyline x:Name="polyline1" Points="0,0 0,25" Stroke="Gray" Margin="8,7,8,7"/>
+                    <Button x:Name="buttonPlay" Width="20"
                             ToolTip="启动"
                             Background="Transparent"
                             Style="{StaticResource PathButtonStyle}"
@@ -85,11 +165,11 @@
                             Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                             FontFamily="{StaticResource IcoMoon}" FontSize="17" Click="ButtonPlay_Click">
-                    <Button.Content>
-                        <TextBlock x:Name="tbPlay" Style="{DynamicResource iconStart}"></TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="buttonSuspend" Width="20"
+                        <Button.Content>
+                            <TextBlock x:Name="tbPlay" Style="{DynamicResource iconStart}"></TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonSuspend" Width="20"
                             ToolTip="暂停" Click="ButtonSuspend_Click"
                             Background="Transparent"
                             Style="{StaticResource PathButtonStyle}"
@@ -97,44 +177,57 @@
                             Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                             FontFamily="{StaticResource IcoMoon}" FontSize="17" >
-                    <Button.Content>
-                        <Grid>
-                            <TextBlock Text="&#xe9c3;" Foreground="Black"/>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="buttonGoback" Width="20"
-                            ToolTip="回退"
-                            Background="Transparent"
-                            Style="{StaticResource PathButtonStyle}"
-                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
-                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                            FontFamily="{StaticResource IcoMoon}" FontSize="17" >
-                    <Button.Content>
-                        <Grid>
-                            <TextBlock Text="&#xe957;" Foreground="Black"/>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="buttonGofoward" Width="20"
-                            ToolTip="快进"
-                            Background="Transparent"
-                            Style="{StaticResource PathButtonStyle}"
-                            ui:ButtonHelper.HoverBrush="#90E5E5E5"
-                            Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                            FontFamily="{StaticResource IcoMoon}" FontSize="17" >
-                    <Button.Content>
-                        <Grid>
-                            <TextBlock Text="&#xe958;" Foreground="Black"/>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-                <ComboBox x:Name="cbPlaySpeed" ToolTip="倍速" Width="80"></ComboBox>
-                <Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft"  
+                        <Button.Content>
+                            <Grid>
+                                <TextBlock Text="&#xe9c3;" Foreground="Black"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonGoback" Width="20"
+                        MouseLeftButtonDown="buttonGoback_MouseLeftButtonDown" MouseLeftButtonUp="buttonGoback_MouseLeftButtonUp"
+                        ToolTip="回退" Background="Transparent"
+                        Style="{StaticResource PathButtonStyle}"
+                        ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                        Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                        FontFamily="{StaticResource IcoMoon}" FontSize="17">
+                        <Button.Content>
+                            <Grid>
+                                <TextBlock Text="&#xe957;" Foreground="Black"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonGofoward" Width="20"
+                        MouseLeftButtonDown="buttonGofoward_MouseLeftButtonDown" MouseLeftButtonUp="buttonGofoward_MouseLeftButtonUp"
+                        ToolTip="快进" Background="Transparent"
+                        Style="{StaticResource PathButtonStyle}"
+                        ui:ButtonHelper.HoverBrush="#90E5E5E5"
+                        Command="{Binding UserCommand,RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                        FontFamily="{StaticResource IcoMoon}" FontSize="17">
+                        <Button.Content>
+                            <Grid>
+                                <TextBlock Text="&#xe958;" Foreground="Black"/>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <ComboBox x:Name="cbPlaySpeed" ToolTip="倍速" Width="80" SelectionChanged="cbPlaySpeed_SelectionChanged"></ComboBox>
+                    <Grid x:Name="gridPlaySlider">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Slider x:Name="sliderTime" Grid.Row="0"  Margin="10,0,0,0" Maximum="2460" Minimum="0"
+                        Template="{StaticResource tmp}" MinWidth="200" Ticks="10,130,1050,2350"
+                        Value="0" TickPlacement="TopLeft" MouseLeftButtonUp="sliderTime_MouseLeftButtonUp" MouseLeftButtonDown="sliderTime_MouseLeftButtonDown"/>
+                        <TextBlock x:Name="textTime" Grid.Row="1" Text="00:00"
+                        FontFamily="宋体" FontSize="14" FontWeight="Bold"
+                        Margin="0,0,0,0" HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
+                <!--<Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft"  
                         IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"  Ticks="1,3,5,7" 
-                        FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />
+                        FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />-->
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" >
