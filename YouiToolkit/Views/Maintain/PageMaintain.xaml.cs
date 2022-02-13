@@ -38,6 +38,7 @@ namespace YouiToolkit.Views
         internal PageMtMapRenderForShow pageMtChartRender2 { get; set; }
         internal PageMtChartRender pageMtChartRender { get; set; }
         internal PageMtMapRenderViewModel pageMtMapRenderViewModel = null;
+        internal PageMtChartRenderViewModel_Speed pageMtChartRenderViewModel_Speed { get; set; }
         DispatcherTimer timer;
         DispatcherTimer timer_Render;
         int playSpeed = 5;
@@ -86,6 +87,7 @@ namespace YouiToolkit.Views
             //PageMapRender.Reload(MapRenderReloadTarget.MapCapture);
             gridChart.ShowSubPage(pageMtChartRender);
             pageMtMapRenderViewModel = new PageMtMapRenderViewModel();
+            pageMtChartRenderViewModel_Speed = new PageMtChartRenderViewModel_Speed();
             if (timer == null)
             {
                 timer = new DispatcherTimer();
@@ -230,7 +232,7 @@ namespace YouiToolkit.Views
             {
                 case false:
                     tbPlay.Style = (Style)FindResource("iconStop");
-                    buttonPlay.ToolTip = "停止";
+                    buttonPlay.ToolTip = "暂停";
                     mo.videoPlayingFlag = true;
                     break;
                 case true:
@@ -350,13 +352,15 @@ namespace YouiToolkit.Views
         }
         private void DoUpdateTimeBar()
         {
-            pageMtMapRenderViewModel.ChangeShowTypeTo(MtNavDataShowType.PlayBack);
             pageMtMapRenderViewModel.GetAlarmData();
+            pageMtMapRenderViewModel.ChangeShowTypeTo(MtNavDataShowType.PlayBack);
             spPlayControls.Visibility = Visibility.Visible;
             sliderTime.Minimum = mapModel.StartTime.Ticks;
             sliderTime.Maximum = mapModel.EndTime.Ticks;
             sliderTime.Ticks = GetAlarmTicks();
             mo.updateTimeBarFlag = false;
+            pageMtChartRenderViewModel_Speed.ResetSpeedShowTime();
+            pageMtChartRenderViewModel_Speed.GetSpeedData();
         }
         private DoubleCollection GetAlarmTicks()
         {

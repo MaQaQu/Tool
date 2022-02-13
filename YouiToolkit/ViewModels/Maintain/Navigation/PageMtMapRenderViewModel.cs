@@ -30,7 +30,6 @@ namespace YouiToolkit.ViewModels
             }
             catch { }
         }
-
         public void GetAlarmData()
         {
             try
@@ -41,7 +40,6 @@ namespace YouiToolkit.ViewModels
             }
             catch { }
         }
-
         //保存导航文件数据
         public bool DownloadNavData(string filename)
         {
@@ -51,7 +49,7 @@ namespace YouiToolkit.ViewModels
                 mo.strNavDataCacheFilePath = GetDirPath() + "\\" + filename;
                 AddDownloadStep(20);
                 //从缓存表中提取数据
-                List<string> sqlList = commMariaDB.GetSqlFileAndSplit(mo.strNavDataCacheFilePath);
+                List<string> sqlList = commMariaDB.GetSqlFileAndSplit_Nav(mo.strNavDataCacheFilePath);
                 AddDownloadStep(40);
                 //将缓存表数据更新到datatable
                 UpdateNavData(sqlList);
@@ -75,7 +73,7 @@ namespace YouiToolkit.ViewModels
             try
             {
                 mo.strNavDataCacheFilePath = fileName;
-                List<string> sqlList = commMariaDB.GetSqlFileAndSplit(fileName);
+                List<string> sqlList = commMariaDB.GetSqlFileAndSplit_Nav(fileName);
                 UpdateNavData(sqlList);
                 UpdateMapSource("first");
                 SetNavDataTime();
@@ -126,7 +124,7 @@ namespace YouiToolkit.ViewModels
                 switch (cacheNum)
                 {
                     case 0://重新加载数据缓存
-                        List<string> sqlList = commMariaDB.GetSqlFileByTime(time);//yyyyMMddHHmmss格式字符串
+                        List<string> sqlList = commMariaDB.GetSqlFileByTime_Nav(time);//yyyyMMddHHmmss格式字符串
                         UpdateNavData(sqlList);
                         break;
                     case 1://使用第1缓存数据，判断是否触发重新加载第2缓存线程
@@ -183,7 +181,7 @@ namespace YouiToolkit.ViewModels
             {
                 string split = ", ";
                 string[] data = Regex.Split(arr.ToString(), split, RegexOptions.IgnoreCase);
-                if (data.Count() >= 5)
+                if (data.Count() >= 6)
                 {
                     dr = mo.dtNavFilesName.NewRow();
                     dr["id"] = data[0];
@@ -196,8 +194,8 @@ namespace YouiToolkit.ViewModels
                 }
             }
             arrayList.Clear();
-            mo.dtNavFilesName.DefaultView.Sort = "Date Desc,StartTime Desc"; //按CreateTime升排序
-            mo.dtNavFilesName = mo.dtNavFilesName.DefaultView.ToTable();//返回一个新的DataTable
+            mo.dtNavFilesName.DefaultView.Sort = "Date Desc,StartTime Desc";
+            mo.dtNavFilesName = mo.dtNavFilesName.DefaultView.ToTable();
             GC.Collect();
         }
         private void UpdateAlarmData(ArrayList arrayList)
@@ -220,8 +218,8 @@ namespace YouiToolkit.ViewModels
                 }
             }
             arrayList.Clear();
-            mo.dtAlarmData.DefaultView.Sort = "StartTime Desc"; //按CreateTime升排序
-            mo.dtAlarmData = mo.dtAlarmData.DefaultView.ToTable();//返回一个新的DataTable
+            mo.dtAlarmData.DefaultView.Sort = "StartTime Desc"; 
+            mo.dtAlarmData = mo.dtAlarmData.DefaultView.ToTable();
             GC.Collect();
         }
         private void UpdateNavData(List<string> arrayList)
@@ -345,8 +343,8 @@ namespace YouiToolkit.ViewModels
         }
         private void SetNavDataTime()
         {
-            mapModel.StartTime = commMariaDB.GetStartEndTime(1);
-            mapModel.EndTime = commMariaDB.GetStartEndTime(2);
+            mapModel.StartTime = commMariaDB.GetStartEndTime_Nav(1);
+            mapModel.EndTime = commMariaDB.GetStartEndTime_Nav(2);
             mapModel.PlayTime = mapModel.StartTime;
         }
 

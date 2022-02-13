@@ -170,7 +170,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="buttonSuspend" Width="20"
-                            ToolTip="暂停" Click="ButtonSuspend_Click"
+                            ToolTip="停止" Click="ButtonSuspend_Click"
                             Background="Transparent"
                             Style="{StaticResource PathButtonStyle}"
                             ui:ButtonHelper.HoverBrush="#90E5E5E5"

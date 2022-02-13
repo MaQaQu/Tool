@@ -28,7 +28,8 @@ namespace YouiToolkit.Models
             InitDtNavFilesName();
             InitDtNavData();
             InitDtPointCloudData();
-            InitDtAlarmData();
+            InitDtAlarmData(); 
+            InitDtSpeedData();
         }
         public static PageMaintainModel CreateInstance()
         {
@@ -47,18 +48,18 @@ namespace YouiToolkit.Models
         }
         private void InitDtNavData()
         {
-            dtNavData = new DataTable("simulatednavdata");
+            dtNavData = new DataTable("simulatenavdata");
             DataColumn dc = null;
             //dt新增列
             dc = dtNavData.Columns.Add("ID", Type.GetType("System.Int32")); //ID
             dc = dtNavData.Columns.Add("VehicleID", Type.GetType("System.Int32")); //VehicleID
             dc = dtNavData.Columns.Add("CurrentTime", Type.GetType("System.DateTime")); //CurrentTime
             dc = dtNavData.Columns.Add("NavData", Type.GetType("System.String")); //NavData
-            dc = dtNavData.Columns.Add("Remark", Type.GetType("System.String")); //NavData
+            dc = dtNavData.Columns.Add("Remark", Type.GetType("System.String")); //Remark
         }
         private void InitDtPointCloudData()
         {
-            dtPointCloudData = new DataTable("simulatednavdata");
+            dtPointCloudData = new DataTable("simulatepointcloud");
             DataColumn dc = null;
             //dt新增列
             dc = dtPointCloudData.Columns.Add("ID", Type.GetType("System.Int32"));
@@ -71,12 +72,27 @@ namespace YouiToolkit.Models
         }
         private void InitDtAlarmData()
         {
-            dtAlarmData = new DataTable("simulatednavdata");
+            dtAlarmData = new DataTable("simulatealarmdata");
             dtAlarmData.Columns.Add("ID", Type.GetType("System.Int32"));
             dtAlarmData.Columns.Add("VechicleID", Type.GetType("System.Int32"));
             dtAlarmData.Columns.Add("AlarmCode", Type.GetType("System.Int32"));
             dtAlarmData.Columns.Add("StartTime", Type.GetType("System.DateTime"));
             dtAlarmData.Columns.Add("EndTime", Type.GetType("System.DateTime"));
+        }
+        private void InitDtSpeedData()
+        {
+            dtSpeedData = new DataTable("simulatespeeddata");
+            dtSpeedData.Columns.Add("ID", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("VechicleID", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("Speed", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("Unit", Type.GetType("System.String"));
+            dtSpeedData.Columns.Add("Speed_X", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("Unit_X", Type.GetType("System.String"));
+            dtSpeedData.Columns.Add("Speed_Y", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("Unit_Y", Type.GetType("System.String"));
+            dtSpeedData.Columns.Add("Speed_W", Type.GetType("System.Int32"));
+            dtSpeedData.Columns.Add("Unit_W", Type.GetType("System.String"));
+            dtSpeedData.Columns.Add("CurrentTime", Type.GetType("System.DateTime"));
         }
 
         public bool videoPlayingFlag { get; set; }
@@ -91,6 +107,7 @@ namespace YouiToolkit.Models
         public DataTable dtPointCloudData { get; set; }
         public DataTable dtNavFilesName { get; set; }
         public DataTable dtAlarmData { get; set; }
+        public DataTable dtSpeedData { get; set; }
         public string strNavDataCacheFilePath { get; set; }
     }
 }
