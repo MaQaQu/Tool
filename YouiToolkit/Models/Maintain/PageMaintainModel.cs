@@ -22,13 +22,20 @@ namespace YouiToolkit.Models
             downloadingFlag = false;
             navDataDeleteStep = 0;
             deletingFlag = false;
+            navDataOpenStep = 0;
+            openingFlag = false;
             overDownloadFlag = false;
             overDeleteFlag = false;
+            overDownloadConfirmFlag = false;
+            overDeleteConfirmFlag = false;
+            downloadSuccessFlag = true;
+            deleteSuccessFlag = true;
+            openSuccessFlag = true;
             updateTimeBarFlag = false;
             InitDtNavFilesName();
             InitDtNavData();
             InitDtPointCloudData();
-            InitDtAlarmData(); 
+            InitDtAlarmData();
             InitDtSpeedData();
         }
         public static PageMaintainModel CreateInstance()
@@ -100,8 +107,16 @@ namespace YouiToolkit.Models
         public bool downloadingFlag { get; set; }
         public int navDataDeleteStep { get; set; }
         public bool deletingFlag { get; set; }
+        public int navDataOpenStep { get; set; }
+        public bool openingFlag { get; set; }
         public bool overDownloadFlag { get; set; }
+        public bool overDownloadConfirmFlag { get; set; }
         public bool overDeleteFlag { get; set; }
+        public bool overDeleteConfirmFlag { get; set; }
+        public bool overOpenFlag { get; set; }
+        public bool downloadSuccessFlag { get; set; }
+        public bool deleteSuccessFlag { get; set; }
+        public bool openSuccessFlag { get; set; }
         public bool updateTimeBarFlag { get; set; }
         public DataTable dtNavData { get; set; }
         public DataTable dtPointCloudData { get; set; }

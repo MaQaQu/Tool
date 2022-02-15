@@ -227,7 +227,7 @@
                 </StackPanel>
                 <!--<Slider x:Name="SliderName" ToolTip="时间轴" Margin="10,0,0,0" FontSize="10" Width="200" Maximum="10" TickPlacement="TopLeft"  
                         IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True"  Ticks="1,3,5,7" 
-                        FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />-->
+                        FocusVisualStyle="{x:Null}" ui:SliderHelper.SliderStyle="Classic" Value="5" />-->                
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" >
@@ -243,6 +243,7 @@
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <local:MtMapImage Grid.Row="0" x:Name="mapRender"/>
+                
                 <StackPanel Grid.Row="1" Background="#FAFAFA" Orientation="Horizontal">
                     <Button x:Name="btChangeShowType"  Width="65" Click="btChangeShowType_Click"
                     FontFamily="{StaticResource IcoMoon}"

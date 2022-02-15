@@ -36,6 +36,7 @@ namespace YouiToolkit.Models
     {
         downloadConfirm = 1,
         deleteConfirm = 2,
+        openConfirm = 3,
     }
     public enum MtNavDataShowType
     {

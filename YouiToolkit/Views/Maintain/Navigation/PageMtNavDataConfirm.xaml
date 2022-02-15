@@ -1,0 +1,74 @@
+﻿<Window x:Class="YouiToolkit.Views.PageMtNavDataConfirm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YouiToolkit.Views"
+        xmlns:ui ="clr-namespace:YouiToolkit.Design;assembly=YouiToolkit.Design"
+        mc:Ignorable="d"
+        Title="确认下载" Height="250" Width="500" WindowStyle="None" HorizontalAlignment="Center" VerticalAlignment="Center" 
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Background="Transparent"  AllowsTransparency="True">
+    <Border Background="White"
+            CornerRadius="5"
+            Margin="5"
+            MouseLeftButtonDown="BdrMain_MouseLeftButtonDown">
+        <Border.Effect>
+            <DropShadowEffect Color="Gray"
+                              BlurRadius="5"
+                              ShadowDepth="0" />
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid x:Name="gridTitle">
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock x:Name="tbPrompt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20 "
+                           Text="请确认是否下载选中文件？" FontSize="30" FontWeight="Bold" ></TextBlock>
+                <ProgressBar x:Name="pbDownload" Height="24" Margin="0,60,0,0" 
+                             VerticalAlignment="Center" Width="400" Foreground="#FF2EAFF1" Visibility="Hidden" />
+            </Grid>
+            <Grid Grid.Row="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,15" >
+                    <Button x:Name="buttonConfirm" Height="35" Width="80" Click="ButtoConfirm_Click" FontSize="20"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="0,0,0,0"
+                    Background="#5A94AD"
+                    ui:ButtonHelper.HoverBrush="#6EA8C1"
+                    ui:ButtonHelper.CornerRadius="5">
+                        <Button.Content>
+                            <TextBlock>
+                        <Run Text="&#xe98b;" FontFamily="{StaticResource IcoMoon}" />
+                        <ContentControl>
+                            <ContentControl.Content>
+                                <TextBlock Text="确认" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="buttonCancel" Height="35" Width="80" Click="ButtonCancel_Click" FontSize="20"
+                    FontFamily="{StaticResource IcoMoon}"
+                    Margin="20,0,0,0"
+                    Background="#DA5F5F"
+                    ui:ButtonHelper.HoverBrush="#EE7373"
+                    ui:ButtonHelper.CornerRadius="5">
+                        <Button.Content>
+                            <TextBlock>
+                        <Run Text="&#xe992;" FontFamily="{StaticResource IcoMoon}" />
+                        <ContentControl>
+                            <ContentControl.Content>
+                                <TextBlock x:Name="tbCancleText" Text="取消" />
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </TextBlock>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

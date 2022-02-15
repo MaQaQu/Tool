@@ -18,6 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Maintain\Navigation\PageMtNavDataDownloadConfirm.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\splash_screen.jpg" />
     <None Remove="Resources\splash_screen_logo.jpg" />
     <None Remove="Resources\youibot.ico" />
@@ -30,6 +34,10 @@
     <None Remove="Resources\youibot_superellipse.ico" />
     <None Remove="Resources\youibot_superellipse.png" />
     <None Remove="Resources\youibot_white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\Maintain\Navigation\PageMtNavDataDownloadConfirm.xaml" />
   </ItemGroup>
 
   <ItemGroup>

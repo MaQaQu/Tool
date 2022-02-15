@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using YouiToolkit.Design;
 using YouiToolkit.ViewModels;
 
@@ -24,6 +25,9 @@ namespace YouiToolkit.Views
         PageMtMapRenderViewModel pageMtMapRenderViewModel = null;
         StackPanel sp = new StackPanel();
         string selectedFileName = "";
+        PageMtNavDataConfirm deleteConfirm = null;
+        PageMtNavDataConfirm downloadConfirm = null;
+        DispatcherTimer timer;
         public PageMtNavigationDataDownload()
         {
             InitializeComponent();
@@ -31,7 +35,11 @@ namespace YouiToolkit.Views
             pageMtMapRenderViewModel = new PageMtMapRenderViewModel();
             UpdateNavFilsList();
         }
-
+        public void OverDownload()
+        {
+            if (downloadConfirm == null)
+                this.Close();
+        }
         private void InitControl()
         {
             KeyDown += (s, e) =>
@@ -50,6 +58,56 @@ namespace YouiToolkit.Views
                         break;
                 }
             };
+            if (timer == null)
+            {
+                timer = new DispatcherTimer();
+                timer.Interval = new TimeSpan(0, 0, 0, 0, 100);//设置的间隔为100ms
+                timer.Tick += timer_Tick;
+                timer.IsEnabled = true;
+            }
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                refreshDownloadState();
+                refreshDeleteState();
+            }
+            catch { }
+        }
+        private void refreshDownloadState()
+        {
+            if (pageMtMapRenderViewModel.mo.overDownloadConfirmFlag)
+            {
+                if (downloadConfirm != null)
+                {
+                    downloadConfirm.Close();
+                    pageMtMapRenderViewModel.mo.navDataDownloadStep = 0;
+                    pageMtMapRenderViewModel.mo.downloadingFlag = false;
+                    if (pageMtMapRenderViewModel.mo.navDataDownloadStep == 100)
+                        pageMtMapRenderViewModel.mo.updateTimeBarFlag = true;
+                    pageMtMapRenderViewModel.mo.overDownloadFlag = true;
+                    pageMtMapRenderViewModel.mo.overDownloadConfirmFlag = false;
+                    downloadConfirm = null;
+                }
+            }
+        }
+        private void refreshDeleteState()
+        {
+            if (pageMtMapRenderViewModel.mo.overDeleteConfirmFlag)
+            {
+                if (deleteConfirm != null)
+                {
+                    deleteConfirm.Close();
+                    pageMtMapRenderViewModel.mo.navDataDeleteStep = 0;
+                    pageMtMapRenderViewModel.mo.deletingFlag = false;
+                    pageMtMapRenderViewModel.mo.overDeleteFlag = true;
+                    pageMtMapRenderViewModel.mo.overDeleteConfirmFlag = false;
+                    stackPanelNavFiles.Children.Clear();
+                    UpdateNavFilsList();
+                    deleteConfirm = null;
+                }
+            }
         }
 
         private void UpdateNavFilsList()
@@ -143,12 +201,10 @@ namespace YouiToolkit.Views
                 return;
             }
             pageMtMapRenderViewModel.mo.overDownloadFlag = false;
-            PageMtNavDataDownloadConfirm c = new PageMtNavDataDownloadConfirm("请确认是否下载选中文件？", (int)Models.MtNavDataDownloadConfirmType.downloadConfirm, selectedFileName);
-            c.ShowInTaskbar = false;
-            c.Topmost = true;
-            c.ShowDialog();
-            if (pageMtMapRenderViewModel.mo.overDownloadFlag)
-                this.Close();
+            downloadConfirm = new PageMtNavDataConfirm("请确认是否下载选中文件？", (int)Models.MtNavDataDownloadConfirmType.downloadConfirm, selectedFileName);
+            downloadConfirm.ShowInTaskbar = false;
+            downloadConfirm.Topmost = true;
+            downloadConfirm.Show();
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
@@ -159,15 +215,15 @@ namespace YouiToolkit.Views
                 return;
             }
             pageMtMapRenderViewModel.mo.overDeleteFlag = false;
-            PageMtNavDataDownloadConfirm c = new PageMtNavDataDownloadConfirm("请确认是否删除选中文件？", (int)Models.MtNavDataDownloadConfirmType.deleteConfirm, selectedFileName);
-            c.ShowInTaskbar = false;
-            c.Topmost = true;
-            c.ShowDialog();
-            if (pageMtMapRenderViewModel.mo.overDeleteFlag)
-            {
-                stackPanelNavFiles.Children.Clear();
-                UpdateNavFilsList();
-            }
+            deleteConfirm = new PageMtNavDataConfirm("请确认是否删除选中文件？", (int)Models.MtNavDataDownloadConfirmType.deleteConfirm, selectedFileName);
+            deleteConfirm.ShowInTaskbar = false;
+            deleteConfirm.Topmost = true;
+            deleteConfirm.Show();
+            //if (pageMtMapRenderViewModel.mo.overDeleteFlag)
+            //{
+            //    stackPanelNavFiles.Children.Clear();
+            //    UpdateNavFilsList();
+            //}
         }
 
         private void BdrMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

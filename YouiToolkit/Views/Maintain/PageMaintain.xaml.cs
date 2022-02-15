@@ -41,6 +41,8 @@ namespace YouiToolkit.Views
         internal PageMtChartRenderViewModel_Speed pageMtChartRenderViewModel_Speed { get; set; }
         DispatcherTimer timer;
         DispatcherTimer timer_Render;
+        PageMtNavDataConfirm openConfirm = null;
+        PageMtNavigationDataDownload download = null;
         int playSpeed = 5;
         int playTick = 0;
         int playAddTime = 1000;
@@ -126,9 +128,50 @@ namespace YouiToolkit.Views
                         spPlayControls.Visibility = Visibility.Visible;
                         break;
                 }
+                refreshOpenState();
+                refreshDownloadState();
             }
             catch { }
         }
+        private void refreshOpenState()
+        {
+            if (mo.overOpenFlag)
+            {
+                openConfirm.OverOpenConfirm();
+                if (mo.openSuccessFlag)
+                {
+                    mo.updateTimeBarFlag = true;
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开成功！", ToastLocation.TopCenter));
+                    stopPlay();
+                }
+                else
+                {
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开失败！", ToastLocation.TopCenter));
+                    mo.openSuccessFlag = true;
+                }
+                mo.overOpenFlag = false;
+            }
+        }
+        private void refreshDownloadState()
+        {
+            if (mo.overDownloadFlag)
+            {
+                download.OverDownload();
+                if (mo.downloadSuccessFlag)
+                {
+                    mo.updateTimeBarFlag = true;
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "读取成功！", ToastLocation.TopCenter));
+                    stopPlay();
+                }
+                else
+                {
+                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "读取失败！", ToastLocation.TopCenter));
+                    mo.downloadSuccessFlag = true;
+                }
+                mo.overDownloadFlag = false;
+            }
+        }
+        
         private void timer_Render_Tick(object sender, EventArgs e)
         {
             try
@@ -162,20 +205,17 @@ namespace YouiToolkit.Views
             };
             if (openFileDialog.ShowDialog() ?? false)
             {
-                //选择MariaDB文件
+                mo.overOpenFlag = false;
+                mo.openingFlag = true;
+                mo.openSuccessFlag = true;
                 string txtFile = openFileDialog.FileName;
-                //读取文件内容
-                if (pageMtMapRenderViewModel.OpenNavDataSqlFile(txtFile))
-                {
-                    mo.updateTimeBarFlag = true;
-                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开成功！", ToastLocation.TopCenter));
-                    stopPlay();
-                }
-                else
-                {
-                    DispatcherHelper.BeginInvoke(() => Toast.Success(this, "打开失败！", ToastLocation.TopCenter));
-                }
-
+                System.Threading.Thread threadOpen = new System.Threading.Thread(() =>
+            pageMtMapRenderViewModel.OpenNavDataSqlFile(txtFile));
+                threadOpen.Start();
+                openConfirm = new PageMtNavDataConfirm("正在打开文件，请稍候！", (int)Models.MtNavDataDownloadConfirmType.openConfirm);
+                openConfirm.ShowInTaskbar = false;
+                openConfirm.Topmost = true;
+                openConfirm.Show();
             }
         }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -220,9 +260,9 @@ namespace YouiToolkit.Views
         {
             try
             {
-                PageMtNavigationDataDownload nd = new PageMtNavigationDataDownload();
-                nd.Topmost = true;
-                nd.ShowDialog();
+                download = new PageMtNavigationDataDownload();
+                download.Topmost = true;
+                download.Show();
             }
             catch { }
         }
@@ -304,7 +344,6 @@ namespace YouiToolkit.Views
         {
             if (startGoBack || startGofoward)
             {
-                //计次 增量递增
                 if (playAddTick % 2 == 0)
                 {
                     playAddTick = 1;

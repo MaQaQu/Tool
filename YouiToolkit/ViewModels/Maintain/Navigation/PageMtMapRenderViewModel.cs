@@ -23,10 +23,12 @@ namespace YouiToolkit.ViewModels
         {
             try
             {
-                //mo.dtNavFilesName = commMariaDB.DoSelect("SELECT * FROM simulatenavfilesname ORDER BY DATE desc,starttime desc");
-                string path = GetDirPath() + "\\simulatenavfilesname.sql";
-                ArrayList sqlArrayList = commMariaDB.GetSqlFile(path);
-                UpdateFilesName(sqlArrayList);
+                //从数据库中读取
+                mo.dtNavFilesName = commMariaDB.DoSelect("SELECT * FROM simulatenavfilesname ORDER BY DATE desc,starttime desc");
+                //从文件中读取
+                //string path = GetDirPath() + "\\simulatenavfilesname.sql";
+                //ArrayList sqlArrayList = commMariaDB.GetSqlFile(path);
+                //UpdateFilesName(sqlArrayList);
             }
             catch { }
         }
@@ -59,13 +61,16 @@ namespace YouiToolkit.ViewModels
                 AddDownloadStep(80);
                 SetNavDataTime();
                 AddDownloadStep(100);
+                mo.downloadSuccessFlag = true;
+                mo.overDownloadConfirmFlag = true;
                 return true;
             }
             catch
             {
-                AddDownloadStep(100);
                 GC.Collect();
             }
+            mo.downloadSuccessFlag = false;
+            mo.overDownloadConfirmFlag = true;
             return false;
         }
         public bool OpenNavDataSqlFile(string fileName)
@@ -73,13 +78,24 @@ namespace YouiToolkit.ViewModels
             try
             {
                 mo.strNavDataCacheFilePath = fileName;
+                AddOpenStep(25);
                 List<string> sqlList = commMariaDB.GetSqlFileAndSplit_Nav(fileName);
+                AddOpenStep(50);
                 UpdateNavData(sqlList);
                 UpdateMapSource("first");
+                AddOpenStep(75);
                 SetNavDataTime();
+                AddOpenStep(100);
+                mo.openSuccessFlag = true;
+                mo.overOpenFlag = true;
                 return true;
             }
-            catch { GC.Collect(); }
+            catch
+            {
+                GC.Collect();
+            }
+            mo.openSuccessFlag = false;
+            mo.overOpenFlag = true;
             return false;
         }
         public bool SaveNavDataSqlFile(string targetName)
@@ -105,13 +121,16 @@ namespace YouiToolkit.ViewModels
                 string[] s = filename.Split('_', '.');
                 DeleteNavData("simulatenavfilesname", Convert.ToInt32(s[1]));
                 AddDeleteStep(100);
+                mo.deleteSuccessFlag = true;
+                mo.overDeleteConfirmFlag = true;
                 return true;
             }
             catch
             {
-                AddDeleteStep(100);
                 GC.Collect();
             }
+            mo.deleteSuccessFlag = false;
+            mo.overDeleteConfirmFlag = true;
             return false;
         }
         public bool PlayNavData(DateTime currentTime)
@@ -218,7 +237,7 @@ namespace YouiToolkit.ViewModels
                 }
             }
             arrayList.Clear();
-            mo.dtAlarmData.DefaultView.Sort = "StartTime Desc"; 
+            mo.dtAlarmData.DefaultView.Sort = "StartTime Desc";
             mo.dtAlarmData = mo.dtAlarmData.DefaultView.ToTable();
             GC.Collect();
         }
@@ -317,6 +336,10 @@ namespace YouiToolkit.ViewModels
         private void AddDeleteStep(int n)
         {
             mo.navDataDeleteStep = n;
+        }
+        private void AddOpenStep(int n)
+        {
+            mo.navDataOpenStep = n;
         }
         private string GetDirPath()
         {
